@@ -15,6 +15,12 @@ module PakyowApplication
 
     configure(:development) do
       $stdout.sync = true
+
+      $docs_path = 'docs'
+    end
+
+    configure(:test) do
+      $docs_path = 'test/docs'
     end
     
     configure(:prototype) do
