@@ -15,7 +15,7 @@ if [ ! -f .env ]; then
   echo "RACK_ENV=development" > .env
 fi
 
-echo "port: 7000" > .foreman
+echo "port: 3000" > .foreman
 
 # Set up DNS through Pow
 if [ -d ~/.pow ]
