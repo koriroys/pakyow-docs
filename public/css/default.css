@@ -1,0 +1,46 @@
+html {
+	height:100%;
+}
+
+#wrapper {
+	width:960px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#nav {
+	float:left;
+	position:fixed;
+	width:200px;
+	height:100%;
+	margin-top:30px;
+}
+
+#nav ul {
+	list-style-type:none;
+}
+
+#nav li {
+	margin:10px 0px;
+}
+
+#content {
+	margin-left:200px;
+}
+
+#content div.topic {
+	margin-top:40px;
+}
+
+#footer {
+	clear:all;
+	opacity:.5;
+	text-align:center;
+	padding:40px 0;
+}
+
+#footer a {
+	font-weight:bold;
+	text-decoration:none;
+	color:#000;
+}

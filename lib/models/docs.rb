@@ -23,6 +23,14 @@ class Docs
 		}
 	end
 
+	def self.find_categories
+		self.matches(self.all, :topic, '0000')
+	end
+
+	def self.find_topics(category_id)
+		self.matches(self.all, :category, category_id).delete_if {|match| match[:topic] == '0000'}
+	end
+
 	private
 
 	def self.matches(list, key, value)
