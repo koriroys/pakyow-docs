@@ -34,6 +34,15 @@ module PakyowApplication
         categories = Docs.find_categories
         view.container(:nav).scope(:category).apply(categories) {|context, category|
           topics = Docs.find_topics(category[:category])
+
+          # add default overview topic
+          topics.unshift({
+            category: category[:category],
+            topic: '0000',
+            nice_name: 'overview',
+            name: 'Overview'
+          })
+
           context.scope(:topic).apply(topics)
         }
       }
