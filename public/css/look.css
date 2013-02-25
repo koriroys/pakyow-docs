@@ -1,0 +1,137 @@
+body {
+  font-family: "proxima-nova", Helvetica, sans-serif;
+  font-size: 13px;
+  color: #333; }
+
+h1, h2, h3, h4, h5 {
+  font-family: "futura-pt";
+  line-height: normal; }
+
+h4 {
+  text-transform: uppercase;
+  font-size: 16px; }
+
+h5 {
+  font-size: 13px;
+  font-family: proxima-nova;
+  font-weight: bold;
+  text-transform: uppercase; }
+
+a {
+  font-weight: bold;
+  color: #206cb1;
+  text-decoration: none; }
+  a:hover {
+    text-decoration: underline;
+    color: #185286; }
+
+.big {
+  font-family: futura-pt;
+  font-size: 24px;
+  color: #999; }
+
+.field-explanation {
+  display: block;
+  font-size: 11px;
+  color: #999; }
+
+/*****************************
+    Forms, Inputs, Buttons
+*****************************/
+label {
+  display: block;
+  font-weight: bold; }
+
+label.inline {
+  display: inline; }
+
+fieldset {
+  margin-bottom: 30px; }
+
+fieldset > ul > li {
+  margin-bottom: 15px; }
+
+fieldset > ul > li > label {
+  margin-bottom: 5px; }
+
+fieldset ul ul li {
+  display: inline-block;
+  margin-right: 15px; }
+
+fieldset ul ul label {
+  display: inline;
+  margin-left: 5px;
+  font-weight: normal;
+  font-size: 12px; }
+
+input[type='text'], input[type='password'], textarea {
+  border: 1px solid #ccc;
+  padding: 5px;
+  outline: none;
+  border-radius: 2px; }
+  input[type='text'].minimal, input[type='password'].minimal, textarea.minimal {
+    background: none;
+    border: none;
+    border-bottom: 1px dashed #ADADAD;
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 3px; }
+
+input[type='text'].date-entry {
+  width: 70px;
+  font-size: 10px; }
+
+input[type='text'], input[type='password'] {
+  width: 200px; }
+
+input[type='text']:focus, input[type='password']:focus, textarea:focus {
+  border-color: #8dabd4; }
+
+input.error:focus {
+  border-color: #d48d8d; }
+
+input[type='submit'], input[type='button'], button, .button {
+  font: 12px "Helvetica Neue", Helvetica, sans-serif;
+  color: #000;
+  cursor: pointer;
+  font-size: 12px;
+  border-radius: 2px;
+  border: 1px solid #adadad;
+  padding: 3px 5px;
+  background: #ffffff;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, white 0%, #f3f3f3 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #f3f3f3));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, white 0%, #f3f3f3 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, white 0%, #f3f3f3 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, white 0%, #f3f3f3 100%);
+  /* IE10+ */
+  background: linear-gradient(top, white 0%, #f3f3f3 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f3f3f3',GradientType=0 );
+  /* IE6-9 */ }
+
+input[type='submit']:hover, input[type='button']:hover, button:hover, .button:hover {
+  text-decoration: none;
+  background: -webkit-linear-gradient(top, white 0%, #f6f6f6 100%);
+  /* Chrome10+,Safari5.1+ */
+  border-color: #ccc;
+  color: #777; }
+  input[type='submit']:hover img, input[type='button']:hover img, button:hover img, .button:hover img {
+    opacity: 0.5; }
+
+input[disabled] {
+  opacity: 0.5; }
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #ccc; }
+
+code {
+  font-family: source-code-pro; }
