@@ -2,6 +2,8 @@ require 'rubygems'
 require 'bundler/setup'
 
 require 'pakyow'
+require 'rdiscount'
+require 'pygments'
 
 require 'sass/plugin/rack'
 Sass::Plugin.options[:template_location] = './resources/sass'
@@ -70,6 +72,10 @@ module PakyowApplication
             content: bindable[:name]
           }
         }
+
+        binding(:formatted_body) {
+          Formatter.format(bindable[:body])
+        }
       }
 
       scope(:topic) {
@@ -78,6 +84,10 @@ module PakyowApplication
             href: "##{bindable[:nice_name]}",
             content: bindable[:name]
           }
+        }
+
+        binding(:formatted_body) {
+          Formatter.format(bindable[:body])
         }
       }
     end
