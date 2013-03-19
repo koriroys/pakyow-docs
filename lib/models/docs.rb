@@ -49,6 +49,7 @@ class Docs
     filename = path.gsub($docs_path + '/', '')
     category_id, topic_id, nice_name = filename.split('-')
     data[:category] = category_id
+    data[:category_nice_name] = self.category_nice_name(category_id)
     data[:topic] = topic_id
     data[:nice_name] = nice_name.gsub('.md', '')
 
@@ -64,6 +65,10 @@ class Docs
     data[:body] = raw.gsub(@@matcher, '')
 
     data
+  end
+
+  def self.category_nice_name(category_id)
+    Dir["#{$docs_path}/#{category_id}-0000-*.md"][0].split('-')[2].split('.')[0]
   end
 
 end

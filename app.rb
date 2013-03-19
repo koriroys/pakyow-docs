@@ -38,6 +38,7 @@ module PakyowApplication
           # add default overview topic
           topics.unshift({
             category: category[:category],
+            category_nice_name: category[:nice_name],
             topic: '0000',
             nice_name: 'overview',
             name: 'Overview'
@@ -90,7 +91,7 @@ module PakyowApplication
       scope(:topic) {
         binding(:name_link) {
           {
-            href: "##{bindable[:nice_name]}",
+            href: router.path(:doc, { name: bindable[:category_nice_name] }) + "##{bindable[:nice_name]}",
             content: bindable[:name]
           }
         }
