@@ -1,5 +1,5 @@
 ---
-name: Templates
+name: Route Templates
 ---
 
 Route templates make it easy to define a set of routes and that can be used multiple times in an application. Each use, or expansion, of the template has its own set of route functions. During expansion the template takes care of defining the routes and setting the name, path, and hooks for each route. A template expansion can also create a group (TODO reference) or namespace (TODO reference).

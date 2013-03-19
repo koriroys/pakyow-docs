@@ -1,5 +1,5 @@
 ---
-name: Named Functions
+name: Named Route Functions
 ---
 
 Named functions are exactly that &ndash; named functions that can be used as a primary function for a route. They also come into play when defining route hooks (TODO reference). Defining a function and referencing it in one or more route definitions is easy.

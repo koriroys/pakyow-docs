@@ -1,5 +1,5 @@
 ---
-name: Namespaces
+name: Namespacing Routes
 ---
 
 Namespaces make it possible to group routes under a common URL.
