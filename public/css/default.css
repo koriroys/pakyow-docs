@@ -20,7 +20,8 @@
       font-size: 14px;
       margin: 10px 0px; }
       #nav ul li ul {
-        margin-top: 0; }
+        margin-top: 0;
+        margin-left: 10px; }
         #nav ul li ul a {
           font-weight: normal; }
 
