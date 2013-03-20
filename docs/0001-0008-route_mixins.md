@@ -16,8 +16,6 @@ An application's main route set is called `:main`, and is defined without passin
       # main routes go here
     }
 
-Matching is done using a LIFO (last in, first out) pattern, so the order in which route sets are loaded matters. Main routes are always loaded last and thus have top priority in an application (if two routes match, the one in the main route set wins). Load order for additional route sets is configuration (TODO define).
-
-Only main routes will be auto-reloaded by default. This is configurable (TODO define).
+Matching is done using a LIFO (last in, first out) pattern, so the order in which route sets are loaded matters. Main routes are always loaded last and thus have top priority in an application (if two routes match, the one in the main route set wins). Load order for additional route sets is determined by the order of definition. All route sets defined inside of `app.rb` or `lib` will be auto-reloaded.
 
 Route mixins also provide a way for other libraries to add routes to an application. This is discussed in more detail in "Plugging Pakyow" (TODO reference).
