@@ -24,3 +24,17 @@ When looking up a function, the `fn` helper returns the proc used when defining 
     })
 
 This allows other route helpers to be defined that return a single or set of functions. An example of this can be found in Controllers (TODO reference).
+
+#### Function Context
+
+All functions for a particular route are evaluated in a single context. This allows state to be shared between functions, like so:
+
+    ruby:
+    fn(:foo) {
+      @state = 'bar'
+    }
+
+    get('/', before: fn(:foo)) {
+      pp @state
+      # => bar
+    }
