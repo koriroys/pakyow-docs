@@ -28,6 +28,14 @@ code.console .highlight, code.console pre {
   display:inline;
 }
 
+code.irb:before {
+  content: '> ';
+}
+
+code.irb .highlight, code.irb pre {
+  display:inline;
+}
+
 .highlight  { background: #ffffff; }
 .highlight .c { color: #999988; font-style: italic } /* Comment */
 .highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
