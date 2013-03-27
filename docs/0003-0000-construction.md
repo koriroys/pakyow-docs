@@ -73,6 +73,8 @@ The compiled view at `/sub` would look like:
     </body>
     </html>
 
+Containers can be defined from any view, and even defined multiple times in the same view. It just works.
+
 #### Root View Override
 
 The root view can be overridden at any point in the hierarchy by appending it to the folder name. For example, say a second root view was added called `another_root.html`. Using it for the `/sub` view path would look like:
