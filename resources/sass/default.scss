@@ -12,6 +12,7 @@
   z-index:10;
   top:0;
   border-right:3px solid #b51c12;
+  overflow:auto;
 
   a {
     color:#88150e;
@@ -25,12 +26,30 @@
       font-size:14px;
       margin:10px 0px;
 
+      a {
+        border-bottom:1px solid #B51C12;
+
+        &:hover {
+          text-decoration:none;
+        }
+      }
+
       ul {
         margin-top:0;
         margin-left:10px;
 
+        li {
+          font-size:13px;
+          margin:6px 0;
+        }
+
         a {
           font-weight:normal;
+          border-bottom:0;
+
+          &:hover {
+            text-decoration:underline;
+          }
         }
       }
     }

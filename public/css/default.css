@@ -10,7 +10,8 @@
   height: 100%;
   z-index: 10;
   top: 0;
-  border-right: 3px solid #b51c12; }
+  border-right: 3px solid #b51c12;
+  overflow: auto; }
   #nav a {
     color: #88150e; }
   #nav ul {
@@ -19,11 +20,21 @@
     #nav ul li {
       font-size: 14px;
       margin: 10px 0px; }
+      #nav ul li a {
+        border-bottom: 1px solid #B51C12; }
+        #nav ul li a:hover {
+          text-decoration: none; }
       #nav ul li ul {
         margin-top: 0;
         margin-left: 10px; }
+        #nav ul li ul li {
+          font-size: 13px;
+          margin: 6px 0; }
         #nav ul li ul a {
-          font-weight: normal; }
+          font-weight: normal;
+          border-bottom: 0; }
+          #nav ul li ul a:hover {
+            text-decoration: underline; }
 
 #content {
   margin-left: 240px;
