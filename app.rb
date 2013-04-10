@@ -10,6 +10,7 @@ Sass::Plugin.options[:template_location] = './resources/sass'
 Sass::Plugin.options[:css_location] = './public/css'
 
 require 'pp'
+require 'json'
 
 module PakyowApplication
   class Application < Pakyow::Application
@@ -70,6 +71,48 @@ module PakyowApplication
         else
           # show index
           presenter.view_path = '/'
+        end
+      }
+
+      get('/mobile/categories') {
+        categories = []
+        Docs.find_categories.each {|c|
+          categories << {:nice_name => c[:nice_name], :name => c[:name]}
+        }
+        app.send(categories.to_json, "application/json")
+      }
+
+      get('/mobile/:category/topics') {
+        topics = [{:nice_name => 'overview', :name => 'General'}]
+        Docs.find_topic_names(params[:category]).each {|t|
+          topics << {:nice_name => t[:nice_name], :name => t[:name]}
+        }
+        app.send(topics.to_json, "application/json")
+      }
+
+      get('/mobile/:name', :mobile_doc) {
+        presenter.root_path = "/no_nav.html"
+        name = params[:name]
+
+        if name && !name.empty?
+          presenter.view_path = '/doc'
+
+          if category = Docs.find(params[:name]).first
+            topics = Docs.find_topics(category[:category])
+
+            view.container(:main).with { |view|
+              view.scope(:category).bind(category)
+
+              view.scope(:topic).apply(topics) {|context, topic|
+                context.prop('name').attributes.id = topic[:nice_name]
+              }
+            }
+          else
+            app.handle 404
+          end
+        else
+          # show index
+          app.redirect router.path(:doc)
         end
       }
     end

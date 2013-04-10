@@ -31,6 +31,10 @@ class Docs
 		self.matches(self.all, :category, category_id).delete_if {|match| match[:topic] == '0000'}
 	end
 
+	def self.find_topic_names(category_name)
+		self.matches(self.all, :category_nice_name, category_name).delete_if {|match| match[:topic] == '0000'}
+	end
+
 	private
 
 	def self.matches(list, key, value)
