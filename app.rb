@@ -74,20 +74,16 @@ module PakyowApplication
         end
       }
 
-      get('/mobile/categories') {
-        categories = []
+      get('/mobile/docs_structure') {
+        docs = []
         Docs.find_categories.each {|c|
-          categories << {:nice_name => c[:nice_name], :name => c[:name]}
+          category = {:nice_name => c[:nice_name], :name => c[:name], :topics => [{:nice_name => 'overview', :name => 'General'}]}
+          Docs.find_topic_names(category[:nice_name]).each {|t|
+            category[:topics] << {:nice_name => t[:nice_name], :name => t[:name]}
+          }
+          docs << category
         }
-        app.send(categories.to_json, "application/json")
-      }
-
-      get('/mobile/:category/topics') {
-        topics = [{:nice_name => 'overview', :name => 'General'}]
-        Docs.find_topic_names(params[:category]).each {|t|
-          topics << {:nice_name => t[:nice_name], :name => t[:name]}
-        }
-        app.send(topics.to_json, "application/json")
+        app.send(docs.to_json, "application/json")
       }
 
       get('/mobile/:name', :mobile_doc) {
