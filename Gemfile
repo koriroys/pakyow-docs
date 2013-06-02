@@ -1,4 +1,5 @@
 source "http://rubygems.org"
+ruby "1.9.3"
 
 gem "pakyow", :git => "git@github.com:metabahn/pakyow.git"
 gem "thin"
