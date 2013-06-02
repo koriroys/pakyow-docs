@@ -1,11 +1,12 @@
 GIT
-  remote: git@github.com:metabahn/pakyow.git
-  revision: 662e60c761484fdd26e7c3b6866116f75bb5c324
+  remote: git://github.com/metabahn/pakyow.git
+  revision: 04c268ae29419780b8b088e0c94baf4ba69d5836
   specs:
     pakyow (0.8rc1)
       pakyow-core (= 0.8rc1)
       pakyow-mailer (= 0.8rc1)
       pakyow-presenter (= 0.8rc1)
+      pakyow-rake (= 0.8rc1)
     pakyow-core (0.8rc1)
       rack (~> 1.3)
     pakyow-mailer (0.8rc1)
@@ -14,6 +15,8 @@ GIT
       pakyow-presenter (= 0.8rc1)
     pakyow-presenter (0.8rc1)
       nokogiri (~> 1.5)
+      pakyow-core (= 0.8rc1)
+    pakyow-rake (0.8rc1)
       pakyow-core (= 0.8rc1)
 
 GEM
@@ -24,14 +27,12 @@ GEM
     daemons (1.1.4)
     eventmachine (0.12.10)
     ffi (1.0.11)
-    i18n (0.6.2)
-    mail (2.5.3)
-      i18n (>= 0.4.0)
+    mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mime-types (1.21)
+    mime-types (1.23)
     minitest (4.5.0)
-    nokogiri (1.5.6)
+    nokogiri (1.5.9)
     polyglot (0.3.3)
     pygments.rb (0.2.4)
       rubypython (~> 0.5.3)
