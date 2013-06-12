@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/metabahn/pakyow.git
-  revision: 04c268ae29419780b8b088e0c94baf4ba69d5836
+  revision: 4c2c44da2f88f4e6668a3baa5abfdb8fa1f1bbde
   specs:
     pakyow (0.8rc1)
       pakyow-core (= 0.8rc1)
@@ -31,8 +31,10 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.23)
+    mini_portile (0.5.0)
     minitest (4.5.0)
-    nokogiri (1.5.9)
+    nokogiri (1.6.0)
+      mini_portile (~> 0.5.0)
     polyglot (0.3.3)
     pygments.rb (0.2.4)
       rubypython (~> 0.5.3)
@@ -47,7 +49,7 @@ GEM
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
-    treetop (1.4.12)
+    treetop (1.4.14)
       polyglot
       polyglot (>= 0.3.1)
     turn (0.9.6)
