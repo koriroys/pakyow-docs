@@ -1,5 +1,5 @@
 ---
-name: Mailing with Mailer
+name: Sending Mail
 ---
 
 Pakyow has a separate library, pakyow-mailer, for sending mail. It's built on the <a href="https://github.com/mikel/mail" target="_blank">mail</a> gem and adds the ability for views to be delivered through email. Here's a basic example:

@@ -91,7 +91,7 @@ This is identical to defining a `get` route for `/` with a name of `:default`.
 #### Regex Matchers
 
 In addition to string matchers, regex is also supported.
-  
+
     ruby:
     # match anything
     get(/.*/) {}

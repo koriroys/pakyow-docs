@@ -6,7 +6,7 @@
 
 #nav {
   position:fixed;
-  width:200px;
+  width:250px;
   height:100%;
   z-index:10;
   top:0;
@@ -86,7 +86,7 @@
 }
 
 #content {
-  margin-left:240px;
+  margin-left:310px;
   margin-top:40px;
   margin-right:40px;
   max-width:700px;
@@ -127,17 +127,12 @@
 }
 
 #footer {
-  text-align: center;
-  margin:80px 0 40px;
   text-transform: uppercase;
   color:#aaa;
   font-size:11px;
-  left:70px;
-  right:70px;
   padding-bottom:50px;
-  width:700px;
-  margin:auto;
-  margin-top:150px;
+  width:600px;
+  margin:150px 310px 40px;
 
   a {
     font-weight:normal;

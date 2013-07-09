@@ -36,16 +36,16 @@ Pakyow::App.define do
     fn(:navigation) {
       categories = Docs.find_categories
       view.container(:nav).scope(:category).apply(categories) {|context, category|
-        topics = Docs.find_topics(category[:category])
+        topics = Docs.find_topics(category[:nice_name])[1..-1]
 
-        # add default overview topic
-        topics.unshift({
-          category: category[:category],
-          category_nice_name: category[:nice_name],
-          topic: '0000',
-          nice_name: 'overview',
-          name: 'Overview'
-        })
+        # # add default overview topic
+        # topics.unshift({
+        #   # category: category[:category],
+        #   category_nice_name: category[:nice_name],
+        #   # topic: '0000',
+        #   nice_name: 'overview',
+        #   name: 'Overview'
+        # })
 
         context.scope(:topic).apply(topics)
       }
@@ -53,16 +53,16 @@ Pakyow::App.define do
 
     get('/:name', :doc, after: fn(:navigation)) {
       name = params[:name]
-      
+
       if name && !name.empty?
         presenter.view_path = '/doc'
 
         if category = Docs.find(params[:name]).first
-          topics = Docs.find_topics(category[:category])
+          topics = Docs.find_topics(params[:name])[1..-1]
 
           view.container(:main).with { |view|
             view.scope(:category).bind(category)
-            
+
             view.scope(:topic).apply(topics) {|context, topic|
               context.prop('name').attributes.id = topic[:nice_name]
             }

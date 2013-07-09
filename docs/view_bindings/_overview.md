@@ -1,5 +1,5 @@
 ---
-name: Data Bindings
+name: View Bindings
 ---
 
 TODO where to define bindings?
@@ -40,13 +40,3 @@ Here's the result:
     </div>
 
 Of course, the color will be randomly assigned each time bind is called.
-
-- overview
-  - route data to the view
-  - sit between logic and view
-- defining
-  - for scope/prop
-  - setting values
-  - modifying values
-  - changing the view
-- mixins

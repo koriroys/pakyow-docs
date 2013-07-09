@@ -1,5 +1,5 @@
 ---
-name: Binding Data
+name: Data Binding
 ---
 
 Pakyow views are logicless and data is instead bound into the view from the

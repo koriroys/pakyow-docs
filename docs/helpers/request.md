@@ -1,6 +1,8 @@
 ---
-name: Request & Response
+name: Request
 ---
+
+TODO rewrite
 
 The underlying Rack Request & Response objects can be accessed through the `request` and `response` methods. This is useful for directly modifying things like response status:
 
@@ -14,5 +16,3 @@ In addition, the following things are available in the request:
     request.action      # the action called in this request
     request.format      # the format used in this request (defaults to HTML)
     request.error       # the error that occurred during the request
-
-See a full explanation of the Request & Response objects here (TODO link).
