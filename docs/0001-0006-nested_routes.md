@@ -30,10 +30,6 @@ Adding a group is just as easy:
 
       group(before: [:protect]) {
         get('/cannot_see_this') {}
-
-        namespace(:nope, 'nope') {
-          default {}
-        }
       }
     }
 
@@ -42,9 +38,8 @@ In this case four routes are created:
   - GET /foo
   - GET /foo/bar
   - GET /foo/cannot_see_this
-  - GET /foo/cannot_see_this/nope
 
-The last two routes also have a before hook called `protect`. As expected, hooks are applied at and below the depth they are defined.
+The grouped route inherits the `protect` hook from the group it belongs in. So as expected, hooks are applied at and below the depth they are defined.
 
 #### Nested Template Paths
 
