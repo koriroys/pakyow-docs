@@ -7,19 +7,21 @@ Pakyow provides a way to generate full URL strings with a named route and route 
 Let's start with a simple route:
 
     ruby:
-    get(:foo, 'foo') {}
+    get :foo, 'foo' do
+      # ...
+    end
 
 The URL for the `:foo` route can be generated from the current instance of `Router`:
 
     ruby:
-    router.path(:foo)
+    router.path :foo
     # => /foo
 
 For routes with arguments, data can be passed to `#path` that is applied to the generated URL:
 
     ruby:
-    get(:bar, 'bar/:my_arg') {}
-    router.path(:bar, { my_arg: '123' })
+    get :bar, 'bar/:my_arg' do; end
+    router.path :bar, my_arg: '123'
     # => /bar/123
 
 Any object can be passed as data to `#path` that supports key lookup (e.g. `Hash`).
@@ -29,10 +31,10 @@ Any object can be passed as data to `#path` that supports key lookup (e.g. `Hash
 To generate a URL for a grouped path, simply look up the group before calling `#path`:
 
     ruby:
-    group(:foo) {
-      get(:bar, 'bar') {}
-    }
-    router.group(:foo).path(:bar)
+    group :foo do
+      get(:bar, 'bar') do; end
+    end
+    router.group(:foo).path :bar
     # => /bar
 
 Routes in nested groups are referencable by the group they directly belong to.

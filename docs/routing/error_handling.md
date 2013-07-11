@@ -7,22 +7,23 @@ Handlers are responsible for intercepting an error so that it can be handled by 
 Here are two basic handler definitions:
 
     ruby:
-    handler(404) {
-      pp 'not found'
-    }
+    handler404 do
+      p 'not found'
+    end
 
-    handler(500) {
-      pp 'internal server error'
-    }
+    handler 500 do
+      p 'internal server error'
+    end
 
 When invoked, current execution is stopped, the response status is set accordingly, and control is transferred to the handler. A handler can be invoked explicitely by calling it from a route block, controller, hook, or another handler.
 
     ruby:
-    get('/') {
-      pp "foo"
-      app.handle(404)
-      pp "bar"
-    }
+    get '/' do
+      p 'foo'
+      handle 404
+
+      p 'will never see this'
+    end
 
     # a GET request to '/' will print 'foo' and then 'not found' and return with a status of 404
 

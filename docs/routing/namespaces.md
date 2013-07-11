@@ -5,15 +5,15 @@ name: Namespacing Routes
 Namespaces make it possible to group routes under a common URL.
 
     ruby:
-    namespace('foo') {
-      default {
-        pp 'foo: default'
-      }
+    namespace 'foo' do
+      default do
+        p 'foo: default'
+      end
 
-      get('bar') {
-        pp 'foo: bar'
-      }
-    }
+      get 'bar' do
+        p 'foo: bar'
+      end
+    end
 
     # sending a GET request to '/foo' prints 'foo: default'
     # sending a GET request to '/foo/bar' prints 'foo: bar'
@@ -22,6 +22,6 @@ Namespaces make it possible to group routes under a common URL.
 A namespace is implemented as a special kind of group (TODO reference), so everything about a group is also true of a namespace. This means that namespaces can be assigned hooks and given a name.
 
     ruby:
-    namespace(:foo, 'foo', before: [:some_hook]) {
+    namespace :foo, 'foo', before: [:some_hook] do
       # foo routes go here
-    }
+    end

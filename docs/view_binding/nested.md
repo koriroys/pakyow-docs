@@ -35,9 +35,9 @@ Pakyow's Binding API (TODO link) makes binding data to this view relatively easy
       ]
     }
 
-    view.scope(:post).apply(data) { |ctx, post_data|
+    view.scope(:post).apply(data) do |ctx, post_data|
       ctx.scope(:comment).apply(post_data[:comments])
-    }
+    end
 
 Here's the result:
 

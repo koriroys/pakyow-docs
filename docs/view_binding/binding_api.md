@@ -11,9 +11,9 @@ view, meaning datums are yielded until no more views are available. In the
 single view case, only one view/datum pair is yielded.
 
     ruby:
-    view.for(data) { |view, datum|
+    view.for(data) do |view, datum|
       ...
-    }
+    end
 
 #### match
 
@@ -28,16 +28,16 @@ the data.
 The `repeat` method calls `match`, then yields each view/datum pair.
 
     ruby:
-    view.repeat(data) { |view, datum|
+    view.repeat(data) do |view, datum|
       ...
-    }
+    end
 
 This is the same as chaining `match` and `for`:
 
     ruby:
-    view.match(data).for(data) { |view, datum|
+    view.match(data).for(data) do |view, datum|
       ...
-    }
+    end
 
 #### bind
 

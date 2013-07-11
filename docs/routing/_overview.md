@@ -12,47 +12,47 @@ Routes are responsible for routing a request to back-end logic. In Pakyow, a rou
 This is one of the simplest route definitions:
 
     ruby:
-    get('/') {
+    get '/' do
       p 'got it'
-    }
+    end
 
     # sending a GET request to '/' prints 'got it'
 
 Defining routes for the other supported HTTP methods is just as easy:
 
     ruby:
-    put('/') {
+    put '/' do
       p 'put'
-    }
+    end
 
-    post('/') {
+    post '/' do
       p 'post'
-    }
+    end
 
-    delete('/') {
+    delete '/' do
       p 'delete'
-    }
+    end
 
 Routes should be defined inside an app's `core` block (TODO reference).
 
     ruby:
     class PakyowApplication < Pakyow::Application
       core do
-        get('/') {
+        get '/' do
           p 'got it'
-        }
+        end
 
-        put('/') {
+        put '/' do
           p 'put'
-        }
+        end
 
-        post('/') {
+        post '/' do
           p 'post'
-        }
+        end
 
-        delete('/') {
+        delete '/' do
           p 'delete'
-        }
+        end
       end
     end
 
@@ -61,9 +61,9 @@ Routes should be defined inside an app's `core` block (TODO reference).
 Named arguments can be defined for a route. When the route is matched, data will be parsed from the incoming request and available in the back-end logic through the `params` helper (TODO reference).
 
     ruby:
-    get('say/:msg') {
+    get('say/:msg') do
       p params[:msg]
-    }
+    end
 
     # sending a GET request to '/say/hello' prints 'hello'
 
@@ -72,7 +72,9 @@ Named arguments can be defined for a route. When the route is matched, data will
 Routes can be given an optional name.
 
     ruby:
-    get(:root, '/') {}
+    get :root, '/' do
+      # ...
+    end
 
 This name is used to look up and populate routes in your app (TODO reference).
 
@@ -81,12 +83,16 @@ This name is used to look up and populate routes in your app (TODO reference).
 For convience, a default route can be defined without providing a path.
 
     ruby:
-    default {}
+    default do
+      # ...
+    end
 
 This is identical to defining a `get` route for `/` with a name of `:default`.
 
     ruby:
-    get(:default, '/') {}
+    get :default, '/' do
+      # ...
+    end
 
 #### Regex Matchers
 
@@ -94,13 +100,15 @@ In addition to string matchers, regex is also supported.
 
     ruby:
     # match anything
-    get(/.*/) {}
+    get /.*/ do
+      # ...
+    end
 
 Named captures (available since ruby-1.9) are also supported. When matched, data will be available just like with a route argument.
 
     ruby:
-    get(/say\/(?<msg>(.*))/) {
+    get /say\/(?<msg>(.*))/ do
       p params[:msg]
-    }
+    end
 
     # sending a GET request to '/say/hello' prints 'hello'

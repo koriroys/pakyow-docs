@@ -13,7 +13,7 @@ Sessions can then be set and fetched through the `sessions` helper:
 
     ruby:
     session[:foo] = 'bar'
-    pp session[:foo]
+    p session[:foo]
 
     # prints 'bar'
 
@@ -21,15 +21,15 @@ Cookies can be set and fetched the same way:
 
     ruby:
     cookies[:foo] = 'bar'
-    pp cookies[:foo]
+    p cookies[:foo]
 
     # prints 'bar'
 
 By default, a cookie is created for path '/' and is set to expire in seven days. These defaults can be overridden by using the `set_cookie` helper:
 
     ruby:
-    app.response.set_cookie(:foo, {
+    response.set_cookie :foo, {
       :value => 'bar',
       :expires => Time.now + 3600,
       :path => '/login'
-    })
+    }
