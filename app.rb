@@ -51,6 +51,10 @@ Pakyow::App.define do
       }
     }
 
+    get('/') {
+      reroute('/getting_started')
+    }
+
     get('/:name', :doc, after: fn(:navigation)) {
       name = params[:name]
 
