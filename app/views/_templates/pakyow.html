@@ -19,10 +19,16 @@
 </head>
 
 <body>
-	<div id="nav" data-container="nav"></div>
-  <div id="content" data-container="main"></div>
+  <div data-scope="nav" id="nav">
+    <!-- @include nav -->
+  </div>
+
+  <div id="content" data-scope="content">
+    <!-- @container -->
+  </div>
+
   <div id="footer">
-  	<span>&copy; 2013. Pakyow is a <a href="http://metabahn.com">Metabahn</a> project.</span>
+    <span>&copy; 2013. Pakyow is a <a href="http://metabahn.com">Metabahn</a> project.</span>
   </div>
 </body>
 </html>
