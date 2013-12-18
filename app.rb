@@ -11,6 +11,11 @@ Sass::Plugin.options[:css_location] = './public/css'
 
 require 'pp'
 
+Pakyow::App.after(:load) {
+  #TODO need to be loading/parsing all the docs on app
+  # load rather than in fulfilling the request
+}
+
 Pakyow::App.define do
   config.app.default_environment = :development
 

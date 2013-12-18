@@ -2,4 +2,4 @@
 name: Rack Middleware
 ---
 
-TODO
+TODO: discuss configuring

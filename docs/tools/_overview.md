@@ -15,6 +15,8 @@ If environment is not specified, the `default_environment` defined in the applic
 
 When starting the server, Pakyow will try the following handlers in order:
 
+TODO puma?
+
   - thin
   - mongrel
   - webrick

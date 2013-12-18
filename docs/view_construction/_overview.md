@@ -2,6 +2,8 @@
 name: Compiling Views
 ---
 
+TODO needs to be rewritten based on latest changes
+
 An application's views are grouped into a view store, which is a hierarchical set of markup files that resembles the routes for an application. These files are compiled together to build the view for a particular request. 
 
 Here's a simple view hierarchy:

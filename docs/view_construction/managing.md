@@ -2,6 +2,8 @@
 name: Managing Compilation
 ---
 
+TODO needs to be rewritten based on latest
+
 View compilation is easily managed from the backend. The view path can be changed:
 
     ruby:

@@ -2,21 +2,4 @@
 name: Presentation Layer
 ---
 
-- define presentation layer
-  - the view
-- presentation layer not required
-  - if it is, need a presenter
-  - define presenter, its roles
-- presentation cycle
-  - incoming request, construct view, apply logic
-  - compare/contrast with other frameworks
-- presenter concepts
-  - separation of concerns
-    - structure: designer; logic: developer
-  - structure only means no logic
-    - views are declarative
-      - how they're composed
-      - the data they present
-  - separation means structural view is never destructed
-    - rollback to prototype mode at any point (TODO reference tip/trick)
-- view driven development
+TODO bryanp

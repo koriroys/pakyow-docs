@@ -2,6 +2,8 @@
 name: Route Templates
 ---
 
+TODO rewrite based on latest changes, explain template as creating a dsl around routing aspects
+
 Route templates make it easy to define a set of routes and that can be used multiple times in an application. Each use, or expansion, of the template has its own set of route functions. During expansion the template takes care of defining the routes and setting the name, path, and hooks for each route. A template expansion can also create a group (TODO reference) or namespace (TODO reference).
 
 Templates are useful in cases where sets of common actions are needed that follow a similar pattern. RESTful routes (TODO reference) are a perfect use-case for templates. In fact, there is a built-in template for defining RESTful routes. Here is the template:

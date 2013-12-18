@@ -53,6 +53,8 @@ The grouped route inherits the `protect` hook from the group it belongs in. So a
 
 #### Nested Template Paths
 
+TODO this can probably go away or move to "restful"
+
 When nesting templates, the default nested path is the path provided in the expansion. This, for example:
 
     ruby:

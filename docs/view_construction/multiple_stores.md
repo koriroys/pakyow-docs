@@ -2,6 +2,8 @@
 name: Multiple View Stores
 ---
 
+TODO needs to be rewritten based on latest
+
 Only a single view store is configured by default. However, multiple view stores are supported. Additional view stores can be defined by appending the name and path to the `view_stores` presenter config option (TODO reference):
 
     ruby:

@@ -2,17 +2,4 @@
 name: Pakyow Concepts
 ---
 
-- intro
-  - pakyow encourages/enables a unique process/approach
-  - goals of this process
-    - better collaboration
-    - rapid development
-    - performance
-- view first development
-  - explain the process
-    - build the view with no backend
-    - add the backend without changing the view
-  - view construction / templating
-- data binding
-  - connection between backend/frontend
-  - include what's coming in 0.9 (realtime)
+TODO bryanp

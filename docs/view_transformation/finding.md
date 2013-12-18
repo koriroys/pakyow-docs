@@ -2,4 +2,4 @@
 name: Finding Nodes
 ---
 
-TODO
+TODO only specific nodes can be found, why, etc

@@ -2,4 +2,4 @@
 name: DOM Attributes
 ---
 
-TODO
+TODO managing attributes
