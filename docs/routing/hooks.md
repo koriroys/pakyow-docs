@@ -15,7 +15,7 @@ Another use for named functions is as a before, after, or around hook for a rout
     #   login_required
     #   main route function
 
-Though a silly example, we could use the function as an after hook:
+Though a silly example, we could use the function as an after hook (TODO instead of a silly example, how about a call to a user activity log function? - CH):
 
     ruby:
     get 'protected', :after => :login_required
