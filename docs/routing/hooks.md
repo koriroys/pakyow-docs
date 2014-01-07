@@ -15,14 +15,18 @@ Another use for named functions is as a before, after, or around hook for a rout
     #   login_required
     #   main route function
 
-Though a silly example, we could use the function as an after hook (TODO instead of a silly example, how about a call to a user activity log function? - CH):
+As appropriate, we could also use a function as an after hook:
 
     ruby:
-    get 'protected', :after => :login_required
+    fn :log_user_activity do
+      # write record of data accessed via active page
+    end
 
-    # sending a GET request to '/protected' results in a call order of:
+    get 'tracked_query', :after => :log_user_activity
+
+    # sending a GET request to '/tracked_query' results in a call order of:
     #   main route function
-    #   login_required
+    #   log_user_activity
 
 Multiple hooks of a type are supported and are called in the order defined:
 
