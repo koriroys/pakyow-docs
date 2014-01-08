@@ -7,7 +7,7 @@ Handlers are responsible for intercepting an error so that it can be handled by 
 Here are two basic handler definitions:
 
     ruby:
-    handler404 do
+    handler 404 do
       p 'not found'
     end
 
