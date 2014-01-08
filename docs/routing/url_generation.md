@@ -2,7 +2,7 @@
 name: URL Generation
 ---
 
-Pakyow provides a way to generate full URL strings with a named route and route data. This means the URL is defined once (in the route definition) and can be used throughout the application without duplication. API changes are much less menacing.
+Pakyow provides a way to generate full URL strings with a named route and route data. This means the URL is defined once (in the route definition) and can be used throughout the application without duplication. It also makes API changes much less menacing.
 
 Let's start with a simple route:
 
@@ -37,4 +37,4 @@ To generate a URL for a grouped path, simply look up the group before calling `#
     router.group(:foo).path :bar
     # => /bar
 
-Routes in nested groups are referencable by the group they directly belong to.
+Routes in nested groups are referenceable by the group they directly belong to.
