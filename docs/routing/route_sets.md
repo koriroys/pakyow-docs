@@ -4,7 +4,7 @@ name: Route Sets
 
 TODO include something here about mixins, including reference to the more detailed docs on mixins
 
-As a Pakyow application grows, so does app.rb (TODO reference architecture). Route sets allow sets of routes to be moved out of app.rb into their own source files. (TODO where should these source files live?) Each set is registered with a unique name, like so:
+As a Pakyow application grows, so does app.rb (TODO reference architecture). Route sets allow sets of routes to be moved out of app.rb into their own source files located in your application's lib/routes directory. (TODO does anything need to be done to ensure that these files are loaded?) Each set is registered with a unique name, like so:
 
     ruby:
     Pakyow.app.routes :my_routes do
