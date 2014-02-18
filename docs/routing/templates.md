@@ -47,8 +47,6 @@ If we did this long-hand, it would look like this:
       # show
     end
 
-The big win offered by templates is the ability to hide intricate routing details in the template definition, leaving the implementor to stay focused on writing application logic. 
-
 Templates offer a few wins over the long-hand approach:
 
   - Intricacies of the particular routes are hidden in the template definition, leaving the implementor to focus on the logic tied to the routes.
