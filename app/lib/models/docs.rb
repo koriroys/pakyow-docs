@@ -2,9 +2,7 @@ class Docs
 
 	@@matcher = /^(---\s*\n.*?\n?)^(---\s*$\n?)/m
 
-	def self.all
-    return @results if @results && Pakyow.app.env == :production
-
+  def self.load
     @results = []
     config = YAML.load(File.read('docs/_order.yaml'))
     config.each { |category|
@@ -42,8 +40,10 @@ class Docs
 
       @results << result
     }
+  end
 
-    return @results
+	def self.all
+    @results
 	end
 
 	def self.find(category)

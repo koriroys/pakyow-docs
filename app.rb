@@ -12,8 +12,7 @@ Sass::Plugin.options[:css_location] = './public/css'
 require 'pp'
 
 Pakyow::App.after(:load) {
-  #TODO need to be loading/parsing all the docs on app
-  # load rather than in fulfilling the request
+  Docs.load
 }
 
 Pakyow::App.define do
