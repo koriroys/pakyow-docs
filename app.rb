@@ -31,6 +31,10 @@ Pakyow::App.define do
   configure(:production) do
     $stdout.sync = true
     $docs_path = 'docs'
+
+    app.auto_reload = false
+    app.static = false
+    presenter.view_caching = true
   end
 
   configure(:prototype) do
