@@ -9,3 +9,7 @@ gem "minitest"
 gem "turn"
 gem "rdiscount"
 gem "pygments.rb"
+
+group :development do
+  gem "capistrano", "2.15.5"
+end
