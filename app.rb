@@ -34,7 +34,7 @@ Pakyow::App.define do
 
     app.auto_reload = false
     app.static = false
-    presenter.view_caching = true
+    app.errors_in_browser = false
   end
 
   configure(:prototype) do
