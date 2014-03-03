@@ -12,4 +12,4 @@ You can also specify a severity:
     ruby:
     Pakyow.logger.write 'this is just a warning', :warn
 
-The logger can be [configured](/configuration) to ignore statements below a particular severity.
+The logger can be [configured](/docs/configuration) to ignore statements below a particular severity.

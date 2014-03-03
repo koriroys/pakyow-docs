@@ -22,6 +22,8 @@ Pakyow::App.define do
   configure(:development) do
     $stdout.sync = true
     $docs_path = 'docs'
+
+    $uri_prefix = ''
   end
 
   configure(:test) do
@@ -31,6 +33,7 @@ Pakyow::App.define do
   configure(:production) do
     $stdout.sync = true
     $docs_path = 'docs'
+    $uri_prefix = '/docs'
 
     app.auto_reload = false
     app.static = false

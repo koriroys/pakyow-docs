@@ -20,7 +20,7 @@ Namespaces make it possible to group routes under a common URI.
     #
     # sending a GET request to '/' or '/bar' results in a 404
 
-A namespace is implemented as a special kind of [group](/routing#groups), so everything about a group is also true of a namespace. This means that namespaces can be assigned hooks and given a name.
+A namespace is implemented as a special kind of [group](/docs/routing#groups), so everything about a group is also true of a namespace. This means that namespaces can be assigned hooks and given a name.
 
     ruby:
     namespace :foo, 'foo', before: [:some_hook] do

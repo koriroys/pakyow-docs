@@ -2,7 +2,7 @@
 name: Route Templates
 ---
 
-Route templates make it possible to create a DSL for aspects of your routes. The built-in [RESTful route handling](/routing#restful) in Pakyow is implemented as a template. It's easiest to understand in practice, so here's the built-in RESTful template for your reference:
+Route templates make it possible to create a DSL for aspects of your routes. The built-in [RESTful route handling](/docs/routing#restful) in Pakyow is implemented as a template. It's easiest to understand in practice, so here's the built-in RESTful template for your reference:
 
     ruby:
     template :restful do
@@ -51,7 +51,7 @@ Templates offer a few wins over the long-hand approach:
 
 #### Template Hooks
 
-[Hooks](/routing#hooks) can be defined in the template definition or expansion. The difference is that defining a hook in the definition applies the hook to every expansion, while defining a hook on a single expansion applies it to that one expansion. They can be defined at different levels in each case.
+[Hooks](/docs/routing#hooks) can be defined in the template definition or expansion. The difference is that defining a hook in the definition applies the hook to every expansion, while defining a hook on a single expansion applies it to that one expansion. They can be defined at different levels in each case.
 
 For definitions, hooks can be defined on the entire definition or only for a particular route in the definition.
 

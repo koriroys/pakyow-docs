@@ -55,4 +55,4 @@ These contexts are available to the following methods:
 - bind
 - apply
 
-Read more [here](/view_management#traversing).
+Read more [here](/docs/view_management#traversing).

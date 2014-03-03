@@ -16,7 +16,7 @@ Pakyow::App.bindings do
   scope :topic do
     binding :name_link do
       {
-        href: router.path(:doc, { name: bindable[:category_nice_name] }) + "##{bindable[:nice_name]}",
+        href: File.join($uri_prefix, router.path(:doc, { name: bindable[:category_nice_name] }) + "##{bindable[:nice_name]}"),
         content: bindable[:name]
       }
     end

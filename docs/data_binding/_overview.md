@@ -3,7 +3,7 @@ name: Data Binding
 ---
 
 Pakyow views are logicless and data is instead bound into the view from the
-application logic (see [Architecture](/getting_started#architecture)). This is possible by making the
+application logic (see [Architecture](/docs/getting_started#architecture)). This is possible by making the
 view aware of the data it presents.
 
 A data-aware view contains nodes labeled as a scope (`data-scope`) or a prop

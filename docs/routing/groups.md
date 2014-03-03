@@ -2,7 +2,7 @@
 name: Grouping Routes
 ---
 
-Groups make it possible to organize related routes. A route group can be named and used later when [looking up and creating a route URI](/routing#uri_generation). Names are optional, but routes in an unnamed group cannot be accessed for URI generation.
+Groups make it possible to organize related routes. A route group can be named and used later when [looking up and creating a route URI](/docs/routing#uri_generation). Names are optional, but routes in an unnamed group cannot be accessed for URI generation.
 
     ruby:
     group :foo do
@@ -11,7 +11,7 @@ Groups make it possible to organize related routes. A route group can be named a
       end
     end
 
-[Hooks](/routing#hooks) can be applied to a group of routes, making it easier to organize back-end logic. A common need in a web-based application is to protect parts of the application so that only authenticated users have access. Though an easy problem to solve conceptually, it becomes tedius to define and manage the routes if hooks are applied to each route individually. Instead, we can use route groups:
+[Hooks](/docs/routing#hooks) can be applied to a group of routes, making it easier to organize back-end logic. A common need in a web-based application is to protect parts of the application so that only authenticated users have access. Though an easy problem to solve conceptually, it becomes tedius to define and manage the routes if hooks are applied to each route individually. Instead, we can use route groups:
 
     ruby:
     fn :require_auth do

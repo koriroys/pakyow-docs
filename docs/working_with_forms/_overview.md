@@ -27,14 +27,14 @@ If a field already has a `name`, Pakyow will not overwrite it.
 
 #### Action / Method
 
-In the case of RESTful routes, Pakyow will automatically set the form action and method based on the state of the object. For this to work, you will need to add the following code to the [bindings](/bindings) for the form's scope:
+In the case of RESTful routes, Pakyow will automatically set the form action and method based on the state of the object. For this to work, you will need to add the following code to the [bindings](/docs/bindings) for the form's scope:
 
     ruby:
     Pakyow::App.bindings do
       restful :post
     end
 
-The argument should reference the name of the [RESTful route group](/routing#restful).
+The argument should reference the name of the [RESTful route group](/docs/routing#restful).
 
 Now, when binding data to the form the action and method will be set for you and the form will be submitted to the right place.
 

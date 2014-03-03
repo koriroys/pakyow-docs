@@ -12,7 +12,7 @@ The execution of a route block, a controller, a hook, or a handler can be stoppe
     ruby:
     reroute '/foo'
 
-Or even better, if you define your route with a name (such as :foo) the URI will be generated [automatically](/routing#uri_generation):
+Or even better, if you define your route with a name (such as :foo) the URI will be generated [automatically](/docs/routing#uri_generation):
 
     ruby:
     reroute :foo
