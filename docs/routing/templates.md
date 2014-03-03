@@ -2,117 +2,84 @@
 name: Route Templates
 ---
 
-TODO rewrite based on latest changes, explain template as creating a dsl around routing aspects
-
-Route templates make it easy to define a set of routes and that can be used multiple times in an application. Each use, or expansion, of the template has its own set of route functions. During expansion the template takes care of defining the routes and setting the name, path, and hooks for each route. A template expansion can also create a group (TODO reference) or namespace (TODO reference).
-
-Templates are useful in cases where sets of common actions are needed that follow a similar pattern. RESTful routes (TODO reference) are a perfect use-case for templates. In fact, there is a built-in template for defining RESTful routes. Here is the template:
+Route templates make it possible to create a DSL for aspects of your routes. The built-in [RESTful route handling](/routing#restful) in Pakyow is implemented as a template. It's easiest to understand in practice, so here's the built-in RESTful template for your reference:
 
     ruby:
     template :restful do
-      default, fn(:default)
-      
-      get '/:id', fn(:show)
+      resource_id = ":#{@group}_id"
 
-      get '/new', :new, fn(:new)
-      post '/', :create, fn(:create)
+      nested_path { |path| File.join(path, resource_id) }
+      view_path = direct_path.gsub(/:[^\/]+/, '').split('/').reject { |p| p.empty? }.join('/')
 
-      get '/:id/edit', :edit, fn(:edit)
-      put '/:id', :update, fn(:update)
-
-      delete '/:id', :delete, fn(:delete)
-    end
-
-When expanding a template, route functions are defined as named actions:
-
-    ruby:
-    expand :restful do
-      action:default do
-        # default
+      fn :reset_view_path do
+        presenter.path = File.join(view_path, 'show') if @presenter
       end
 
-      action :show do
-        # show
-      end
+      get :list, '/'
+      get :new,  '/new'
+      get :show, "/#{resource_id}", before: [:reset_view_path]
+
+      post :create, '/'
+
+      get :edit, "/#{resource_id}/edit"
+      patch :update, "/#{resource_id}"
+      put :replace, "/#{resource_id}"
+      delete :delete, "/#{resource_id}"
+
+      group :collection
+      namespace :member, resource_id
     end
 
-If we did this long-hand, it would look like this:
+This template can then be expanded any number of times in an application's routes:
 
     ruby:
-    default do
-      # default
-    end
-      
-    get '/:id' do
-      # show
-    end
+    Pakyow::App.routes do
+      restful :resource_name, '/resource_path' do
+        list do
+          # ...
+        end
 
-The big win offered by templates is the ability to hide intricate routing details in the template definition, leaving the implementor to stay focused on writing application logic. 
+        # ...
+      end
+    end
 
 Templates offer a few wins over the long-hand approach:
 
-  - Intricacies of the particular routes are hidden in the template definition, leaving the implementor to focus on the logic tied to the routes.
-  - Common patterns can be expressed, leading to a potentially significant reduction in code duplication.
+  - Routing intricacies are hidden in the template definition, leaving the implementor to focus on the logic.
+  - Common patterns can be abstracted, leading to a significant reduction in code duplication.
   - Route changes can be made in one place and be automatically applied to each expansion.
-
-#### Groups &amp; Namespaces
-
-Expanding a template creates either a group or a namespace (TODO reference) (yes, the long-hand example above is kind of a lie). What is created is dependent on the arguments passed to the expansion. If only a route name is passed, an unnamed group is created. Passing two arguments results in a named route group. The following expands the `restful` template into a group named `posts`:
-
-    ruby:
-    expand :restful, :posts do
-      # ...
-    end
-
-Passing the path as a third argument creates a namespace:
-
-    ruby:
-    expand :restful, :posts, '/posts' do
-      # ...
-    end
-
-The example above creates a group of routes called `posts` namespaced under `/posts`.
 
 #### Template Hooks
 
-Hooks (TODO reference) can be defined in the template definition or expansion. The difference is defining a hook in the definition applies the hook to every expansion, while defining a hook on a single expansion applies it to that one expansion. They can be defined at different levels in each case.
+[Hooks](/routing#hooks) can be defined in the template definition or expansion. The difference is that defining a hook in the definition applies the hook to every expansion, while defining a hook on a single expansion applies it to that one expansion. They can be defined at different levels in each case.
 
 For definitions, hooks can be defined on the entire definition or only for a particular route in the definition.
 
     ruby:
     template :my_template, before: [:foo] do
-      get 'one', before: [:bar], fn(:one)
-      get 'two', fn(:two)
+      get :one, before: [:bar]
+      get :two
     end
 
-    expand :my_template do
-      action :one do
-        # ...
+    my_template do
+      one do
+        # hooks: foo, bar
       end
 
-      action :two do
-        # ...
+      two do
+        # hooks: foo
       end
     end
-
-In the above example both routes have the `foo` before hook, but only the first route has both `foo` and `bar` before hooks.
 
 Expansions work in a similar way. Hooks can be defined on the entire expansion or only for a particular route in the definition.
 
     ruby:
-    template :my_template do
-      get 'one', fn(:one)
-      get 'two', fn(:two)
-    end
-
-    expand :my_template, before: [:foo] do
-      action :one, before: [bar] do
+    my_template, before: [:foo] do
+      one, before: [bar] do
         # ...
       end
 
-      action :two do
+      two do
         # ...
       end
     end
-
-The above example results in the same routes as the definition example.

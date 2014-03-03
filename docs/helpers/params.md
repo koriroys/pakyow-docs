@@ -2,9 +2,9 @@
 name: Params
 ---
 
-Query string parameters and values from parameterized routes are available in the `params` helper.
+Query string parameters, POST data, and values from routes arguments are available in the `params` helper.
 
     ruby:
-    params
-
-(TODO reference working with forms)
+    get ':foo' do
+      p params[:foo]
+    end

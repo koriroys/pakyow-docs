@@ -2,12 +2,12 @@
 - routing
 - helpers
 - view_concepts
-- view_construction
-- view_transformation
-- view_binding
-- view_bindings
+- view_composition
+- view_management
+- data_binding
+- bindings
+- working_with_forms
 - view_processors
-- view_forms
 - mailer
 - data
 - configuration

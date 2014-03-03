@@ -2,11 +2,16 @@
 name: Helpers
 ---
 
-Helper methods are defined in the Pakyow::Helpers module. They can be made accessible to any class by adding an include statement for `Pakyow::Helpers`.
-
-You can extend this module by creating a Pakyow::Helpers module in the 'lib' directory.
+Helper methods are defined in the Pakyow::Helpers module. You can define your own helpers in `app/lib/helpers.rb`:
 
     ruby:
     module Pakyow::Helpers
-      # your user-created helper methods go here
+      def do_something
+        # ...
+      end
     end
+
+The helpers are automatically included ino routes and bindings. You can add them to any class by including:
+
+    ruby:
+    include Pakyow::Helpers

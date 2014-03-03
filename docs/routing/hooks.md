@@ -2,27 +2,27 @@
 name: Route Hooks
 ---
 
-Another use for named functions is as a before, after, or around hook for a route. Once defined, hooks will be executed in order with the main route function. For example, we could define a `login_required` function that checks for proper authentication:
+Another use for named functions is as a before, after, or around hook for a route. Once defined, hooks will be executed in order along with the main route function. For example, we could define a `require_auth` function that checks for proper authentication:
 
     ruby:
-    fn :login_required do
+    fn :require_auth do
       redirect '/' unless session[:user]
     end
 
-    get 'protected', :before => :login_required
+    get 'protected', :before => :require_auth
 
     # sending a GET request to '/protected' results in a call order of:
-    #   login_required
+    #   require_auth
     #   main route function
 
-Though a silly example, we could use the function as an after hook:
+Though a silly example, we could also use the function as an after hook:
 
     ruby:
-    get 'protected', :after => :login_required
+    get 'protected', :after => :require_auth
 
     # sending a GET request to '/protected' results in a call order of:
     #   main route function
-    #   login_required
+    #   require_auth
 
 Multiple hooks of a type are supported and are called in the order defined:
 

@@ -15,13 +15,12 @@ If environment is not specified, the `default_environment` defined in the applic
 
 When starting the server, Pakyow will try the following handlers in order:
 
-TODO puma?
-
+  - puma
   - thin
   - mongrel
   - webrick
 
-You can run a specific handler by setting the `server.handler` config option (TODO reference).
+You can run a specific handler by setting the `server.handler` [config option](/configuration).
 
 #### Console
 
@@ -32,7 +31,7 @@ The console command loads an application into a REPL (like IRB).
 
 If environment is not specified, the `default_environment` defined in the application will be used.
 
-Once the REPL is started, you can execute Ruby code against your application (TODO reference testing). If a file is changed, the REPL can be reloaded, like so:
+Once the REPL is started, you can execute Ruby code against your application. If a file is changed, the REPL can be reloaded, like so:
 
     irb:
     reload

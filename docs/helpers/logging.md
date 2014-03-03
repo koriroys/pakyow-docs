@@ -2,9 +2,14 @@
 name: Logging
 ---
 
-Write to the log using the static Log class:
+Write to the log using the static Logger class:
 
     ruby:
-    Log.puts 'hello log'
+    Pakyow.logger.write 'hello log'
 
-    # prints 'hello log' to the log
+You can also specify a severity:
+
+    ruby:
+    Pakyow.logger.write 'this is just a warning', :warn
+
+The logger can be [configured](/configuration) to ignore statements below a particular severity.

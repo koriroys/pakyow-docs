@@ -5,14 +5,14 @@ name: Sending Data
 The `send` helper is an easy way to send a file or data in the response:
 
     ruby:
-    app.send your_file
+    send a_file
 
 You can pass it a file or a path. You can also pass the file name and the mime type (which is guessed if not provided):
 
     ruby:
-    app.send your_file, 'text/xml', 'xml_data.xml'
+    send a_file, 'text/xml', 'xml_data.xml'
 
-It can also send data:
+It can also send data (a mime type must be provided in this case):
 
     ruby:
-    app.send your_data, 'text/xml'
+    send some_data, 'text/xml'

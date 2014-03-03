@@ -22,4 +22,4 @@ Access to the <a href="https://github.com/mikel/mail" target="_blank">mail</a> g
 	mailer.message.add_file("/path/to/file.jpg")
 	mailer.deliver_to("test@pakyow.com")
 
-There are several configuration settings for Mailer. See (TODO reference configuration) for more information.
+There are several configuration settings for Mailer. See [configuration](/configuration) for more information.

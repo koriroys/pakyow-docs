@@ -3,6 +3,5 @@
 - redirecting
 - halting
 - sending_data
-- request
-- response
+- request_response
 - logging

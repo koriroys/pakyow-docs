@@ -5,7 +5,7 @@
 - templates
 - nested_routes
 - restful
-- url_generation
+- uri_generation
 - error_handling
 - route_sets
 - mixins

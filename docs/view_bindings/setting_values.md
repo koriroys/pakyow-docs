@@ -1,5 +1,0 @@
----
-name: Setting Values
----
-
-TODO
