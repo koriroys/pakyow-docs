@@ -37,4 +37,4 @@ To generate a URI for a grouped route, simply look up the group before calling `
     router.group(:foo).path :bar
     # => /bar
 
-Routes in nested groups are referencable by the group they directly belong to.
+Routes in nested groups are referenceable by the group they directly belong to.

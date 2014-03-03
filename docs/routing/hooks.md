@@ -20,9 +20,18 @@ Though a silly example, we could also use the function as an after hook:
     ruby:
     get 'protected', :after => :require_auth
 
-    # sending a GET request to '/protected' results in a call order of:
+As appropriate, we could also use a function as an after hook:
+
+    ruby:
+    fn :log_user_activity do
+      # write record of data accessed via active page
+    end
+
+    get 'tracked_query', :after => :log_user_activity
+
+    # sending a GET request to '/tracked_query' results in a call order of:
     #   main route function
-    #   require_auth
+    #   log_user_activity
 
 Multiple hooks of a type are supported and are called in the order defined:
 

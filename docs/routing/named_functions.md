@@ -25,7 +25,7 @@ This allows other route helpers to be defined that return a single or set of fun
 
 #### Route Context
 
-All functions for a particular route are evaluated in a single context. This allows state to be shared between functions, like so:
+All functions for a particular route are evaluated in a single context. This allows state to be shared between functions, like so (use of before is covered under Route Hooks (TODO reference)):
 
     ruby:
     fn :foo do
