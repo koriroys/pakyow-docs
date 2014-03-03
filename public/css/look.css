@@ -1,5 +1,5 @@
 body {
-  font-family: "proxima-nova", Helvetica, sans-serif;
+  font-family: "pragmatica-web", Helvetica, sans-serif;
   font-size: 13px;
   color: #333; }
 
@@ -13,7 +13,7 @@ h4 {
 
 h5 {
   font-size: 13px;
-  font-family: proxima-nova;
+  font-family: "pragmatica-web";
   font-weight: bold;
   text-transform: uppercase; }
 
