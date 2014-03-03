@@ -2,7 +2,7 @@ Pakyow::App.routes do
 
   fn :navigation do
     categories = Docs.find_categories
-    view.scope(:nav).scope(:category).apply(categories) {|context, category|
+    partial(:nav).scope(:category).apply(categories) do |category|
       topics = Docs.find_topics(category[:nice_name])[1..-1]
 
       # # add default overview topic
@@ -14,8 +14,8 @@ Pakyow::App.routes do
       #   name: 'Overview'
       # })
 
-      context.scope(:topic).apply(topics)
-    }
+      scope(:topic).apply(topics)
+    end
   end
 
   default do
@@ -29,17 +29,17 @@ Pakyow::App.routes do
       presenter.path = 'doc'
 
       if category = Docs.find(params[:name]).first
+        view.title = "Pakyow Docs | #{category[:name]}"
+
         topics = Docs.find_topics(params[:name])[1..-1]
 
-        view.scope(:content).with { |view|
-          view.scope(:category).with { |category_ctx|
-            category_ctx.bind(category)
+        container(:default).scope(:category).with do
+          bind(category)
 
-            category_ctx.scope(:topic).apply(topics) {|topic_ctx, topic|
-              topic_ctx.prop('name').attributes.id = topic[:nice_name]
-            }
-          }
-        }
+          scope(:topic).apply(topics) do |topic|
+            prop(:name).attrs.id = topic[:nice_name]
+          end
+        end
       else
         app.handle 404
       end

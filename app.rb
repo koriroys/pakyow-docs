@@ -41,7 +41,7 @@ Pakyow::App.define do
     Formatter.format(content)
   end
 
-  middleware do
-    use Sass::Plugin::Rack
+  middleware do |builder|
+    builder.use Sass::Plugin::Rack
   end
 end
