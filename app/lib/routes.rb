@@ -60,8 +60,8 @@ Pakyow::App.routes do
     if name && !name.empty?
       presenter.path = 'doc'
 
-      if category = Docs.find(params[:name])
-        category = category.first
+      res = Docs.find(params[:name])
+      if res && category = res.first
         view.title = "Pakyow Docs | #{category[:name]}"
 
         topics = Docs.find_topics(params[:name])[1..-1]
