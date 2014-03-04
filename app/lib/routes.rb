@@ -1,5 +1,4 @@
 Pakyow::App.routes do
-
   fn :navigation do
     categories = Docs.find_categories
     partial(:nav).scope(:category).apply(categories) do |category|
@@ -18,6 +17,39 @@ Pakyow::App.routes do
     end
   end
 
+  handler 404, after: [:navigation] do
+    presenter.path = 'errors/404'
+  end
+
+  handler 500, after: [:navigation] do
+    unless Pakyow.app.env == :development
+      subject = 'pakyow-web fail'
+
+      body = []
+      body << request.path
+      body << ""
+      body << request.error.message
+      body << ""
+      body.concat(request.error.backtrace)
+
+      mail = Mail.new do
+        from    'fail@pakyow.com'
+        to      ENV['FAIL_MAIL']
+        subject subject
+        body    body.join("\n")
+      end
+      
+      mail.delivery_method :sendmail
+      mail.deliver
+    end
+
+    presenter.path = 'errors/500'
+  end
+
+  get 'f' do
+    f
+  end
+
   default do
     reroute('/getting_started')
   end
@@ -28,7 +60,8 @@ Pakyow::App.routes do
     if name && !name.empty?
       presenter.path = 'doc'
 
-      if category = Docs.find(params[:name]).first
+      if category = Docs.find(params[:name])
+        category = category.first
         view.title = "Pakyow Docs | #{category[:name]}"
 
         topics = Docs.find_topics(params[:name])[1..-1]

@@ -50,6 +50,8 @@ class Docs
     all.each { |c|
       return c[:topics] if c[:nice_name] == category
     }
+
+    return nil
 	end
 
 	def self.find_categories
