@@ -68,7 +68,7 @@ Routes can be given an optional name.
       # ...
     end
 
-This name is used to look up and populate routes URIs (more here).
+This name is used to look up and populate routes URIs.
 
 #### Default Route
 
