@@ -37,6 +37,8 @@ Pakyow::App.define do
     app.auto_reload = false
     app.static = false
     app.errors_in_browser = false
+
+    logger.path = '../../shared/log'
   end
 
   configure(:prototype) do
