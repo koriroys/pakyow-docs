@@ -1,3 +1,3 @@
 require File.expand_path('../app', __FILE__)
-PakyowApplication::Application.builder.run(PakyowApplication::Application.stage(ENV['RACK_ENV'] || :production))
-run PakyowApplication::Application.builder.to_app
+Pakyow::App.builder.run(Pakyow::App.stage(ENV['RACK_ENV'] || :production))
+run Pakyow::App.builder.to_app

@@ -12,137 +12,48 @@ Sass::Plugin.options[:css_location] = './public/css'
 require 'pp'
 require 'json'
 
-module PakyowApplication
-  class Application < Pakyow::Application
-    config.app.default_environment = :development
+Pakyow::App.after(:load) {
+  Docs.load
+}
 
-    configure(:development) do
-      $stdout.sync = true
+Pakyow::App.define do
+  config.app.default_environment = :development
 
-      $docs_path = 'docs'
-    end
+  configure(:development) do
+    $stdout.sync = true
+    $docs_path = 'docs'
 
-    configure(:test) do
-      $docs_path = 'test/docs'
-    end
+    $uri_prefix = ''
+  end
 
-    configure(:prototype) do
-      app.ignore_routes = true
-    end
+  configure(:test) do
+    $docs_path = 'test/docs'
+  end
 
-    core do
-      fn(:navigation) {
-        categories = Docs.find_categories
-        view.container(:nav).scope(:category).apply(categories) {|context, category|
-          topics = Docs.find_topics(category[:category])
+  configure(:production) do
+    $stdout.sync = true
+    $docs_path = 'docs'
+    $uri_prefix = '/docs'
 
-          # add default overview topic
-          topics.unshift({
-            category: category[:category],
-            category_nice_name: category[:nice_name],
-            topic: '0000',
-            nice_name: 'overview',
-            name: 'Overview'
-          })
+    app.auto_reload = false
+    app.static = false
+    app.errors_in_browser = false
 
-          context.scope(:topic).apply(topics)
-        }
-      }
+    logger.path = '../../shared/log'
 
-      get('/:name', :doc, after: fn(:navigation)) {
-        name = params[:name]
-        
-        if name && !name.empty?
-          presenter.view_path = '/doc'
+    Encoding.default_external = Encoding::UTF_8
+    Encoding.default_internal = Encoding::UTF_8
+  end
 
-          if category = Docs.find(params[:name]).first
-            topics = Docs.find_topics(category[:category])
+  configure(:prototype) do
+    app.ignore_routes = true
+  end
 
-            view.container(:main).with { |view|
-              view.scope(:category).bind(category)
-              
-              view.scope(:topic).apply(topics) {|context, topic|
-                context.prop('name').attributes.id = topic[:nice_name]
-              }
-            }
-          else
-            app.handle 404
-          end
-        else
-          # show index
-          presenter.view_path = '/'
-        end
-      }
+  processor :md do |content|
+    Formatter.format(content)
+  end
 
-      get('/mobile/docs_structure') {
-        docs = []
-        Docs.find_categories.each {|c|
-          category = {:nice_name => c[:nice_name], :name => c[:name], :topics => [{:nice_name => 'overview', :name => 'General'}]}
-          Docs.find_topic_names(category[:nice_name]).each {|t|
-            category[:topics] << {:nice_name => t[:nice_name], :name => t[:name]}
-          }
-          docs << category
-        }
-        app.send(docs.to_json, "application/json")
-      }
-
-      get('/mobile/:name', :mobile_doc) {
-        presenter.root_path = "/no_nav.html"
-        name = params[:name]
-
-        if name && !name.empty?
-          presenter.view_path = '/doc'
-
-          if category = Docs.find(params[:name]).first
-            topics = Docs.find_topics(category[:category])
-
-            view.container(:main).with { |view|
-              view.scope(:category).bind(category)
-
-              view.scope(:topic).apply(topics) {|context, topic|
-                context.prop('name').attributes.id = topic[:nice_name]
-              }
-            }
-          else
-            app.handle 404
-          end
-        else
-          # show index
-          app.redirect router.path(:doc)
-        end
-      }
-    end
-
-    presenter do
-      scope(:category) {
-        binding(:name_link) {
-          {
-            href: router.path(:doc, { name: bindable[:nice_name] }),
-            content: bindable[:name]
-          }
-        }
-
-        binding(:formatted_body) {
-          Formatter.format(bindable[:body])
-        }
-      }
-
-      scope(:topic) {
-        binding(:name_link) {
-          {
-            href: router.path(:doc, { name: bindable[:category_nice_name] }) + "##{bindable[:nice_name]}",
-            content: bindable[:name]
-          }
-        }
-
-        binding(:formatted_body) {
-          Formatter.format(bindable[:body])
-        }
-      }
-    end
-
-    middleware {
-      use Sass::Plugin::Rack
-    }
+  middleware do |builder|
+    builder.use Sass::Plugin::Rack
   end
 end

@@ -1,5 +1,5 @@
 body {
-  font-family: "proxima-nova", Helvetica, sans-serif;
+  font-family: "pragmatica-web", Helvetica, sans-serif;
   font-size: 13px;
   color: #333; }
 
@@ -13,17 +13,17 @@ h4 {
 
 h5 {
   font-size: 13px;
-  font-family: proxima-nova;
+  font-family: "pragmatica-web";
   font-weight: bold;
   text-transform: uppercase; }
 
 a {
   font-weight: bold;
-  color: #206cb1;
+  color: #19558d;
   text-decoration: none; }
   a:hover {
     text-decoration: underline;
-    color: #185286; }
+    color: #113b62; }
 
 .big {
   font-family: futura-pt;
