@@ -26,4 +26,24 @@ Pakyow::App.bindings do
     end
   end
 
+  scope :contributor do
+    binding :avatar do
+      {:src => "#{bindable['avatar_url']}"}
+    end
+
+    binding :login do
+      {
+        :href => "#{bindable['html_url']}",
+        :content => "#{bindable['login']}"
+      }
+    end
+
+    binding :count do
+      {:content => "#{bindable['contributions']}"}
+    end
+
+    binding :grammatical_num do
+      {:content => bindable['contributions'] > 1 ? 'contributions' : 'contribution'}
+    end
+  end
 end

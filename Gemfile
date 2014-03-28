@@ -9,6 +9,7 @@ gem "minitest"
 gem "turn"
 gem "rdiscount"
 gem "pygments.rb"
+gem "octokit", "~> 2.0"
 
 group :development do
   gem "capistrano", "2.15.5"
