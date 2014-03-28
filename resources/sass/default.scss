@@ -171,7 +171,7 @@ h4 {
 }
 
 .community {
-  width:900px;
+  width:700px;
   margin:auto;
 
   .contributors {
@@ -189,10 +189,11 @@ h4 {
     .contributor {
       margin-top:-4px;
       margin-right:-4px;
+      margin-bottom:0 !important;
       position:relative;
       display:inline-block;
-      width:180px;
-      height:180px;
+      width:175px;
+      height:175px;
 
       .cover {
         display:block;
@@ -211,17 +212,17 @@ h4 {
       }
 
       img {
-        width:180px;
-        height:180px;
+        width:175px;
+        height:175px;
       }
 
       .info-wrapper {
         display:none;
         position:absolute;
         top:0px;
-        right:179px;
-        height:180px;
-        width:180px;
+        right:174px;
+        height:175px;
+        width:175px;
         z-index:1;
 
         background:#FF0013;
@@ -273,13 +274,13 @@ h4 {
 
       &:first-child {
         .info-wrapper {
-          right:-179px;
+          right:-174px;
         }
       }
 
-      &:nth-child(5n+1) {
+      &:nth-child(4n+1) {
         .info-wrapper {
-          right:-179px;
+          right:-174px;
         }
       }
     }
