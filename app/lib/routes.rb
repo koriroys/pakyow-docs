@@ -54,6 +54,16 @@ Pakyow::App.routes do
     reroute('/getting_started')
   end
 
+  get '/community', :community, after: [:navigation] do
+    begin
+      contributors = Octokit.contributors('metabahn/pakyow')
+      view.scope(:contributors).scope(:contributor).apply(contributors)
+    rescue
+      puts "Error building contributors: #{$!}"
+      view.scope(:contributors).remove();
+    end
+  end
+
   get '/:name', :doc, after: [:navigation] do
     name = params[:name]
 
