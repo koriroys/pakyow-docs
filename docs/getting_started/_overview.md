@@ -16,3 +16,6 @@ Software is changing the world, and we want to change how you build software. Ou
 [Browse the source on GitHub.](http://github.com/metabahn/pakyow)
 
 [Follow along on Twitter.](http://twitter.com/pakyow)
+
+#### Pakyow's GitHub Contributors
+<div class="contributor-blocks" data-ui="contributor-blocks" data-config="owner:metabahn, repo:pakyow, blockSize:140, bgColor:#FF0013">
