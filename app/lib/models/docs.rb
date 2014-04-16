@@ -8,39 +8,53 @@ class Category
     @result = { nice_name: @category_name, topics: [] }
   end
 
+  def to_hash
+    @result
+  end
+
   def topics
     topic_files_paths = Dir.glob(File.join("docs", @category_name, '*.md'))
 
     topic_files_paths.each do |topic_file_path|
       topic = parse_file(topic_file_path)
-      topic[:category_nice_name] = @category_name
 
-      if topic[:nice_name] == '_overview'
-        @result[:name] = topic[:name]
-        topic[:nice_name] = 'overview'
-        @result[:topics].unshift(topic)
+      if category_heading?(topic)
+        prepend_category_to_topics_list(topic)
       else
-        @result[:topics] << topic
+        append_topic_to_topics_list(topic)
       end
 
       sort!
     end
-    @result
+    to_hash
   end
 
   private
 
+  def category_heading?(topic)
+    topic[:nice_name] == '_overview'
+  end
+
+  def prepend_category_to_topics_list(topic)
+    @result[:name] = topic[:name]
+    topic[:nice_name] = 'overview'
+    @result[:topics].unshift(topic)
+  end
+
+  def append_topic_to_topics_list(topic)
+    @result[:topics] << topic
+  end
+
   def parse_file(path)
-    data = {}
+    topic = {}
     pn = Pathname.new(path)
     raw = pn.read
-    options = YAML.load(raw.match(MATCHER).to_s)
 
-    data[:nice_name] = pn.basename(".*").to_s
-    data[:name] = options['name']
-    data[:body] = raw.gsub(MATCHER, '')
-
-    data
+    topic[:nice_name] = pn.basename(".*").to_s
+    topic[:name] = YAML.load(raw.match(MATCHER).to_s)['name']
+    topic[:body] = raw.gsub(MATCHER, '')
+    topic[:category_nice_name] = @category_name
+    topic
   end
 
   def topic_order
