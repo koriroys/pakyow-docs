@@ -8,25 +8,25 @@ end
 
 class Docs
   class << self
-    def load(categories)
-      @results = categories.each.with_object([]) { |category_slug, topics|
+    def load(categories_slugs)
+      @categories = categories_slugs.map { |category_slug|
         category = Category.new(category_slug)
         category.process_topics!
-        topics << category.topics
+        category.topics
       }
     end
 
-    def all
-      @results
+    def categories
+      @categories
     end
 
     def find(category)
-      all.each { |c| return c[:topics] if c[:slug] == category }
+      categories.each { |c| return c[:topics] if c[:slug] == category }
       return nil
     end
 
     def find_topics(category)
-      all.inject([]) { |matches, c|
+      categories.inject([]) { |matches, c|
         matches.concat(c[:topics]) if c[:slug] == category
         matches
       }
