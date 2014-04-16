@@ -2,7 +2,7 @@ Pakyow::App.routes do
   fn :navigation do
     categories = Docs.all
     partial(:nav).scope(:category).apply(categories) do |category|
-      topics = Docs.find_topics(category[:nice_name])[1..-1]
+      topics = Docs.find_topics(category[:slug])[1..-1]
       scope(:topic).apply(topics)
     end
   end
@@ -60,7 +60,7 @@ Pakyow::App.routes do
           bind(category)
 
           scope(:topic).apply(topics) do |topic|
-            prop(:name).attrs.id = topic[:nice_name]
+            prop(:name).attrs.id = topic[:slug]
           end
         end
       else
