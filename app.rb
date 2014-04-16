@@ -12,7 +12,8 @@ Sass::Plugin.options[:css_location] = './public/css'
 require 'pp'
 
 Pakyow::App.after(:load) {
-  Docs.load
+  categories = YAML.load(File.read('docs/_order.yaml'))
+  Docs.load(categories)
 }
 
 Pakyow::App.define do

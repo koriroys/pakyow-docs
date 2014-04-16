@@ -5,10 +5,9 @@ class Docs
   MATCHER = /^(---\s*\n.*?\n?)^(---\s*$\n?)/m
 
   class << self
-    def load
+    def load(categories)
       @results = []
-      config = YAML.load(File.read('docs/_order.yaml'))
-      config.each { |category|
+      categories.each { |category|
         result = { nice_name: category, topics: [] }
 
         Dir.glob(File.join($docs_path, category, '*.md')).each do |path|
