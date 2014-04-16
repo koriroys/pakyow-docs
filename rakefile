@@ -5,7 +5,7 @@ env = ARGV[1] || 'development'
 env = env.split('=')[1] || env
 
 require File.join(File.dirname(__FILE__), 'app')
-PakyowApplication::Application.stage(env.to_sym)
+Pakyow::App.stage(ENV['ENV'])
 
 namespace :db do
   desc "create, migrate, and seed the database"
