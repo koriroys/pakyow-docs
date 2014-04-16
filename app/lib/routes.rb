@@ -2,8 +2,7 @@ Pakyow::App.routes do
   fn :navigation do
     categories = Docs.categories
     partial(:nav).scope(:category).apply(categories) do |category|
-      topics = Docs.find_topics(category[:slug])[1..-1]
-      scope(:topic).apply(topics)
+      scope(:topic).apply(category.topics)
     end
   end
 
@@ -44,17 +43,17 @@ Pakyow::App.routes do
     reroute('/getting_started')
   end
 
-  get '/:name', :doc, after: [:navigation] do
-    name = params[:name]
+  get '/:slug', :doc, after: [:navigation] do
+    slug = params[:slug]
 
-    if name && !name.empty?
+    if slug && !slug.empty?
       presenter.path = 'doc'
 
-      res = Docs.find(params[:name])
-      if res && category = res.first
-        view.title = "Pakyow Docs | #{category[:name]}"
+      category = Docs.find(params[:slug])
+      if category
+        view.title = "Pakyow Docs | #{category.name}"
 
-        topics = Docs.find_topics(params[:name])[1..-1]
+        topics = category.topics
 
         container(:default).scope(:category).with do
           bind(category)

@@ -1,18 +1,12 @@
 class Category
   MATCHER = /^(---\s*\n.*?\n?)^(---\s*$\n?)/m
+  attr_reader :slug, :name, :overview, :topics
 
   def initialize(slug)
     @slug = slug
-    @name = ""
+    @name = nil
     @topics = []
-  end
-
-  def topics
-    {
-      slug: @slug,
-      topics: @topics,
-      name: @name
-    }
+    @overview = nil
   end
 
   def process_topics!
@@ -21,7 +15,7 @@ class Category
       topic = parse_file(topic_file_path)
 
       if category_heading?(topic)
-        prepend_category_to_topics_list(topic)
+        set_category_attributes(topic)
       else
         append_topic_to_topics_list(topic)
       end
@@ -36,10 +30,9 @@ class Category
     topic[:slug] == '_overview'
   end
 
-  def prepend_category_to_topics_list(topic)
+  def set_category_attributes(topic)
     @name = topic[:name]
-    topic[:slug] = 'overview'
-    @topics.unshift(topic)
+    @overview = topic[:body]
   end
 
   def append_topic_to_topics_list(topic)

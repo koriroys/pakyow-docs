@@ -3,47 +3,26 @@ Pakyow::App.bindings do
   scope :category do
     binding :name_link do
       {
-        href: File.join($uri_prefix, router.path(:doc, { name: bindable[:slug] })),
-        content: bindable[:name]
+        href: File.join($uri_prefix, router.path(:doc, { slug: bindable.slug })),
+        content: bindable.name
       }
     end
 
     binding :formatted_body do
-      Formatter.format(bindable[:body])
+      Formatter.format(bindable.overview)
     end
   end
 
   scope :topic do
     binding :name_link do
       {
-        href: File.join($uri_prefix, router.path(:doc, { name: bindable[:category_slug] }) + "##{bindable[:slug]}"),
+        href: File.join($uri_prefix, router.path(:doc, { slug: bindable[:category_slug] }) + "##{bindable[:slug]}"),
         content: bindable[:name]
       }
     end
 
     binding :formatted_body do
       Formatter.format(bindable[:body])
-    end
-  end
-
-  scope :contributor do
-    binding :avatar do
-      {:src => "#{bindable['avatar_url']}"}
-    end
-
-    binding :login do
-      {
-        :href => "#{bindable['html_url']}",
-        :content => "#{bindable['login']}"
-      }
-    end
-
-    binding :count do
-      {:content => "#{bindable['contributions']}"}
-    end
-
-    binding :grammatical_num do
-      {:content => bindable['contributions'] > 1 ? 'contributions' : 'contribution'}
     end
   end
 end
