@@ -6,4 +6,4 @@ require 'turn/autorun'
 require 'pp'
 
 require File.join(File.dirname(__FILE__), '../app')
-PakyowApplication::Application.stage(:test)
+Pakyow::App.stage(ENV['ENV'])

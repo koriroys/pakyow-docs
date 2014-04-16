@@ -1,93 +1,78 @@
+require 'pathname'
+
 class Docs
 
-	@@matcher = /^(---\s*\n.*?\n?)^(---\s*$\n?)/m
+  MATCHER = /^(---\s*\n.*?\n?)^(---\s*$\n?)/m
 
-  def self.load
-    @results = []
-    config = YAML.load(File.read('docs/_order.yaml'))
-    config.each { |category|
-      result = {nice_name: category, topics: []}
+  class << self
+    def load
+      @results = []
+      config = YAML.load(File.read('docs/_order.yaml'))
+      config.each { |category|
+        result = { nice_name: category, topics: [] }
 
-      Dir.glob(File.join($docs_path, category, '*.md')).each do |path|
-        topic = self.parse_file(path)
-        topic[:category_nice_name] = category
+        Dir.glob(File.join($docs_path, category, '*.md')).each do |path|
+          topic = parse_file(path)
+          topic[:category_nice_name] = category
 
-        if topic[:nice_name] == '_overview'
-          result[:name] = topic[:name]
+          if topic[:nice_name] == '_overview'
+            result[:name] = topic[:name]
+            topic[:nice_name] = 'overview'
 
-          topic[:nice_name] = 'overview'
-          # topic[:name] = 'Overview'
-
-          result[:topics].unshift(topic)
-        else
-          result[:topics] << topic
+            result[:topics].unshift(topic)
+          else
+            result[:topics] << topic
+          end
         end
-      end
 
-      topic_order = YAML.load(
-        File.read(
-          File.join($docs_path, category, '_order.yaml')
+        topic_order = YAML.load(
+          File.read(
+            File.join($docs_path, category, '_order.yaml')
+          )
         )
-      )
+        result[:topics].sort! { |a,b|
+          i_a = topic_order.index(a[:nice_name])
+          i_b = topic_order.index(b[:nice_name])
 
-      # sort em
-      result[:topics].sort! { |a,b|
-        i_a = topic_order.index(a[:nice_name])
-        i_b = topic_order.index(b[:nice_name])
-
-        i_a.to_i <=> i_b.to_i
+          i_a.to_i <=> i_b.to_i
+        }
+        @results << result
       }
+    end
 
-      @results << result
-    }
-  end
+    def all
+      @results
+    end
 
-	def self.all
-    @results
-	end
+    alias_method :find_categories, :all
 
-	def self.find(category)
-    all.each { |c|
-      return c[:topics] if c[:nice_name] == category
-    }
+    def find(category)
+      all.each { |c| return c[:topics] if c[:nice_name] == category }
+      return nil
+    end
 
-    return nil
-	end
+    def find_topics(category)
+      all.inject([]) { |matches, c|
+        matches.concat(c[:topics]) if c[:nice_name] == category
+        matches
+      }
+    end
 
-	def self.find_categories
-    all
-	end
+    private
 
-	def self.find_topics(category)
-    all.inject([]) { |matches, c|
-      matches.concat(c[:topics]) if c[:nice_name] == category
-      matches
-    }
-  end
+    def parse_file(path)
+      data = {}
+      pn = Pathname.new(path)
 
-	private
+      data[:nice_name] = pn.basename(".*").to_s
 
-	def self.parse_file(path)
-    return unless path
-    return unless File.exists?(path)
-    @found = true
+      raw = File.read(path)
 
-    data = {}
+      options = YAML.load(raw.match(MATCHER).to_s)
+      data[:name] = options['name']
 
-    filename = path.gsub($docs_path + '/', '')
-    data[:nice_name] = filename.split('/')[-1].gsub('.md', '')
-
-    # is this a draft?
-    data[:draft] = true if path.split('.')[-1] == 'draft'
-
-    raw = File.read(path)#.split("\n")
-
-    options = YAML.load(raw.match(@@matcher).to_s)
-    data[:name] = options['name'].gsub("\"", '').strip
-
-    # get body
-    data[:body] = raw.gsub(@@matcher, '')
-
-    data
+      data[:body] = raw.gsub(MATCHER, '')
+      data
+    end
   end
 end
