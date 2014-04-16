@@ -43,8 +43,6 @@ class Docs
       @results
     end
 
-    alias_method :find_categories, :all
-
     def find(category)
       all.each { |c| return c[:topics] if c[:nice_name] == category }
       return nil

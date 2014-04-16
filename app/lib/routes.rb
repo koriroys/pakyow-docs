@@ -1,6 +1,6 @@
 Pakyow::App.routes do
   fn :navigation do
-    categories = Docs.find_categories
+    categories = Docs.all
     partial(:nav).scope(:category).apply(categories) do |category|
       topics = Docs.find_topics(category[:nice_name])[1..-1]
       scope(:topic).apply(topics)
