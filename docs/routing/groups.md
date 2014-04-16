@@ -19,7 +19,7 @@ Groups make it possible to organize related routes. A route group can be named a
     end
 
     group :protected, before: [:require_auth] do
-      get '/bar' do
+      get '/foo' do
         p 'you found foo'
       end
 
