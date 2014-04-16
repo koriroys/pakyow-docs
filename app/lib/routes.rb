@@ -3,16 +3,6 @@ Pakyow::App.routes do
     categories = Docs.find_categories
     partial(:nav).scope(:category).apply(categories) do |category|
       topics = Docs.find_topics(category[:nice_name])[1..-1]
-
-      # # add default overview topic
-      # topics.unshift({
-      #   # category: category[:category],
-      #   category_nice_name: category[:nice_name],
-      #   # topic: '0000',
-      #   nice_name: 'overview',
-      #   name: 'Overview'
-      # })
-
       scope(:topic).apply(topics)
     end
   end
@@ -38,7 +28,7 @@ Pakyow::App.routes do
         subject subject
         body    body.join("\n")
       end
-      
+
       mail.delivery_method :sendmail
       mail.deliver
     end
@@ -77,7 +67,6 @@ Pakyow::App.routes do
         app.handle 404
       end
     else
-      # show index
       presenter.path = '/'
     end
   end
