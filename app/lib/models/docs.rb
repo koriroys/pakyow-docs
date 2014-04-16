@@ -12,7 +12,7 @@ class Category
     @result
   end
 
-  def topics
+  def process_topics!
     topic_files_paths = Dir.glob(File.join("docs", @category_name, '*.md'))
 
     topic_files_paths.each do |topic_file_path|
@@ -26,7 +26,6 @@ class Category
 
       sort!
     end
-    to_hash
   end
 
   private
@@ -78,7 +77,9 @@ class Docs
   class << self
     def load(categories)
       @results = categories.each.with_object([]) { |category, topics|
-        topics << Category.new(category).topics
+        category = Category.new(category)
+        category.process_topics!
+        topics << category.to_hash
       }
     end
 
