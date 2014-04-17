@@ -12,20 +12,12 @@ class Category
     topic_files_paths = Dir.glob(File.join("docs", @slug, '*.md'))
     topic_files_paths.each do |topic_file_path|
       topic_parser = TopicParser.new(topic_file_path, slug)
-
       if category_heading?(topic_parser.slug)
         set_category_attributes(topic_parser.name, topic_parser.body)
       else
-        topic_attributes = topic_parser.to_hash
-        topic = Topic.new(topic_attributes[:name],
-          topic_attributes[:body],
-          topic_attributes[:slug],
-          topic_attributes[:category_slug],
-          topic_attributes[:order]
-        )
+        topic = Topic.new(topic_parser.to_hash)
         append_topic_to_topics_list(topic)
       end
-
     end
     sort!
   end
