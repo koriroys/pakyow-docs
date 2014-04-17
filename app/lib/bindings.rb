@@ -16,13 +16,13 @@ Pakyow::App.bindings do
   scope :topic do
     binding :name_link do
       {
-        href: File.join($uri_prefix, router.path(:doc, { slug: bindable[:category_slug] }) + "##{bindable[:slug]}"),
-        content: bindable[:name]
+        href: File.join($uri_prefix, router.path(:doc, { slug: bindable.uri })),
+        content: bindable.name
       }
     end
 
     binding :formatted_body do
-      Formatter.format(bindable[:body])
+      Formatter.format(bindable.body)
     end
   end
 end

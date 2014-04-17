@@ -59,7 +59,7 @@ Pakyow::App.routes do
           bind(category)
 
           scope(:topic).apply(topics) do |topic|
-            prop(:name).attrs.id = topic[:slug]
+            prop(:name).attrs.id = topic.slug
           end
         end
       else

@@ -12,10 +12,15 @@ class Category
   def process_topics!
     topic_files_paths = Dir.glob(File.join("docs", @slug, '*.md'))
     topic_files_paths.each do |topic_file_path|
-      topic = parse_file(topic_file_path)
+      topic_hash = parse_file(topic_file_path)
+      topic = Topic.new(topic_hash[:name],
+        topic_hash[:body],
+        topic_hash[:slug],
+        topic_hash[:category_slug]
+      )
 
-      if category_heading?(topic)
-        set_category_attributes(topic)
+      if category_heading?(topic.slug)
+        set_category_attributes(topic.name, topic.body)
       else
         append_topic_to_topics_list(topic)
       end
@@ -26,13 +31,13 @@ class Category
 
   private
 
-  def category_heading?(topic)
-    topic[:slug] == '_overview'
+  def category_heading?(slug)
+    slug == "_overview"
   end
 
-  def set_category_attributes(topic)
-    @name = topic[:name]
-    @overview = topic[:body]
+  def set_category_attributes(name, overview)
+    @name = name
+    @overview = overview
   end
 
   def append_topic_to_topics_list(topic)
@@ -61,8 +66,8 @@ class Category
 
   def sort!
     @topics.sort! { |a,b|
-      i_a = topic_order.index(a[:slug])
-      i_b = topic_order.index(b[:slug])
+      i_a = topic_order.index(a.slug)
+      i_b = topic_order.index(b.slug)
       i_a.to_i <=> i_b.to_i
     }
   end
