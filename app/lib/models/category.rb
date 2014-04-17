@@ -1,5 +1,4 @@
 class Category
-  MATCHER = /^(---\s*\n.*?\n?)^(---\s*$\n?)/m
   attr_reader :slug, :name, :overview, :topics
 
   def initialize(slug)
@@ -12,21 +11,23 @@ class Category
   def process_topics!
     topic_files_paths = Dir.glob(File.join("docs", @slug, '*.md'))
     topic_files_paths.each do |topic_file_path|
-      topic_hash = parse_file(topic_file_path)
-      topic = Topic.new(topic_hash[:name],
-        topic_hash[:body],
-        topic_hash[:slug],
-        topic_hash[:category_slug]
-      )
+      topic_parser = TopicParser.new(topic_file_path, slug)
 
-      if category_heading?(topic.slug)
-        set_category_attributes(topic.name, topic.body)
+      if category_heading?(topic_parser.slug)
+        set_category_attributes(topic_parser.name, topic_parser.body)
       else
+        topic_attributes = topic_parser.to_hash
+        topic = Topic.new(topic_attributes[:name],
+          topic_attributes[:body],
+          topic_attributes[:slug],
+          topic_attributes[:category_slug],
+          topic_attributes[:order]
+        )
         append_topic_to_topics_list(topic)
       end
 
-      sort!
     end
+    sort!
   end
 
   private
@@ -44,32 +45,8 @@ class Category
     @topics << topic
   end
 
-  def parse_file(path)
-    topic = {}
-    pn = Pathname.new(path)
-    raw = pn.read
-
-    topic[:slug] = pn.basename(".*").to_s
-    topic[:name] = YAML.load(raw.match(MATCHER).to_s)['name']
-    topic[:body] = raw.gsub(MATCHER, '')
-    topic[:category_slug] = @slug
-    topic
-  end
-
-  def topic_order
-    @topic_order ||= YAML.load(File.read(path))
-  end
-
-  def path
-    @path ||= File.join($docs_path, @slug, '_order.yaml')
-  end
-
   def sort!
-    @topics.sort! { |a,b|
-      i_a = topic_order.index(a.slug)
-      i_b = topic_order.index(b.slug)
-      i_a.to_i <=> i_b.to_i
-    }
+    @topics.sort_by!(&:order)
   end
 end
 
