@@ -1,15 +1,10 @@
 class Category
-  attr_reader :slug, :name, :overview
-  attr_accessor :topics
+  attr_reader :slug
+  attr_accessor :topics, :name, :overview
 
   def initialize(slug)
     @slug = slug
     @topics = []
-  end
-
-  def set_category_attributes(name, overview)
-    @name = name
-    @overview = overview
   end
 end
 
