@@ -12,10 +12,17 @@ class Docs
       }
     end
 
+    def find(category_slug)
+      categories.find { |category| category.slug == category_slug }
+    end
+
+    private
+
     def parse_topics(category, category_slug)
       topics_file_paths = Dir.glob(File.join("docs", category_slug, '*.md'))
 
-      topics = topics_file_paths.each.with_object([]) do |topic_file_path, topics|
+      topics = []
+      topics_file_paths.each do |topic_file_path|
         topic_parser = TopicParser.new(topic_file_path, category_slug)
         if category_heading?(topic_parser.slug)
           category.name = topic_parser.name
@@ -30,10 +37,6 @@ class Docs
 
     def category_heading?(slug)
       slug == "_overview"
-    end
-
-    def find(category_slug)
-      categories.find { |category| category.slug == category_slug }
     end
   end
 end
