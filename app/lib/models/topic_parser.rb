@@ -1,24 +1,22 @@
 class TopicParser
   MATCHER = /^(---\s*\n.*?\n?)^(---\s*$\n?)/m
 
-  attr_reader :pn, :topic, :category_slug
+  attr_reader :pn, :topic, :category_slug, :order
 
-  def initialize(path, category_slug, manifest)
-    @path = path
+  def initialize(pn, category_slug, order)
+    @pn = pn
     @category_slug = category_slug
-    @pn = Pathname.new(path)
-    @topic = {}
-    @manifest = manifest
+    @order = order
   end
 
   def topic
-    Topic.new({
+    Topic.new(
       slug: slug,
       name: name,
       body: body,
       category_slug: category_slug,
-      order: manifest.order(slug)
-    })
+      order: order
+    )
   end
 
   def slug
@@ -40,6 +38,30 @@ class TopicParser
   end
 
   attr_reader :manifest
+end
+
+class CategoryHeadingParser
+  MATCHER = /^(---\s*\n.*?\n?)^(---\s*$\n?)/m
+
+  def initialize(pn)
+    @pn = pn
+  end
+
+  def name
+    YAML.load(raw.match(MATCHER).to_s)['name']
+  end
+
+  def overview
+    raw.gsub(MATCHER, '')
+  end
+
+  private
+
+  def raw
+    @raw ||= pn.read
+  end
+
+  attr_reader :pn
 end
 
 class ManifestParser

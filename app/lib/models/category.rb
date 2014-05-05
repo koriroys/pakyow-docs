@@ -7,4 +7,3 @@ class Category
     @topics = []
   end
 end
-

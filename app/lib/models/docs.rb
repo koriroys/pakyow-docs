@@ -22,22 +22,26 @@ class Docs
       manifest = ManifestParser.new(category_slug)
 
       topics_file_paths(category_slug).each.with_object([]) { |topic_file_path, topics|
-        topic_parser = TopicParser.new(topic_file_path, category_slug, manifest)
-        if category_heading?(topic_parser.slug)
-          category.name = topic_parser.name
-          category.overview = topic_parser.body
+        pn = Pathname.new(topic_file_path)
+        slug = pn.basename(".*").to_s
+
+        if category_heading?(slug)
+          category_heading = CategoryHeadingParser.new(pn)
+          category.name = category_heading.name
+          category.overview = category_heading.overview
         else
+          topic_parser = TopicParser.new(pn, category_slug, manifest.order(slug))
           topics << topic_parser.topic
         end
       }.sort_by(&:order)
     end
 
-    def topics_file_paths(category_slug)
-      Dir.glob(File.join("docs", category_slug, '*.md'))
-    end
-
     def category_heading?(slug)
       slug == "_overview"
+    end
+
+    def topics_file_paths(category_slug)
+      Dir.glob(File.join("docs", category_slug, '*.md'))
     end
   end
 end
