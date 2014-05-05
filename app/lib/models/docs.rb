@@ -19,13 +19,15 @@ class Docs
     private
 
     def parse_topics(category, category_slug)
+      manifest = ManifestParser.new(category_slug)
+
       topics_file_paths(category_slug).each.with_object([]) { |topic_file_path, topics|
-        topic_parser = TopicParser.new(topic_file_path, category_slug)
+        topic_parser = TopicParser.new(topic_file_path, category_slug, manifest)
         if category_heading?(topic_parser.slug)
           category.name = topic_parser.name
           category.overview = topic_parser.body
         else
-          topics << Topic.new(topic_parser.to_hash)
+          topics << topic_parser.topic
         end
       }.sort_by(&:order)
     end

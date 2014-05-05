@@ -3,21 +3,22 @@ class TopicParser
 
   attr_reader :pn, :topic, :category_slug
 
-  def initialize(path, category_slug)
+  def initialize(path, category_slug, manifest)
     @path = path
     @category_slug = category_slug
     @pn = Pathname.new(path)
     @topic = {}
+    @manifest = manifest
   end
 
-  def to_hash
-    {
+  def topic
+    Topic.new({
       slug: slug,
       name: name,
       body: body,
       category_slug: category_slug,
-      order: order
-    }
+      order: manifest.order(slug)
+    })
   end
 
   def slug
@@ -34,13 +35,23 @@ class TopicParser
 
   private
 
-  def order
-    topic_order.index(slug)
-  end
-
   def raw
     @raw ||= pn.read
   end
+
+  attr_reader :manifest
+end
+
+class ManifestParser
+  def initialize(category_slug)
+    @category_slug = category_slug
+  end
+
+  def order(slug)
+    topic_order.index(slug)
+  end
+
+  private
 
   def topic_order
     @topic_order ||= YAML.load(File.read(manifest_path))
@@ -49,5 +60,6 @@ class TopicParser
   def manifest_path
     @manifest_path ||= File.join($docs_path, category_slug, '_order.yaml')
   end
-end
 
+  attr_reader :category_slug
+end
