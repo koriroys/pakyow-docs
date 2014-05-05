@@ -39,7 +39,7 @@ class TopicParser
   end
 
   def raw
-    @raw ||= @pn.read
+    @raw ||= pn.read
   end
 
   def topic_order
