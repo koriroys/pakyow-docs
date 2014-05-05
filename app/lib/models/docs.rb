@@ -19,10 +19,7 @@ class Docs
     private
 
     def parse_topics(category, category_slug)
-      topics_file_paths = Dir.glob(File.join("docs", category_slug, '*.md'))
-
-      topics = []
-      topics_file_paths.each do |topic_file_path|
+      topics_file_paths(category_slug).each.with_object([]) { |topic_file_path, topics|
         topic_parser = TopicParser.new(topic_file_path, category_slug)
         if category_heading?(topic_parser.slug)
           category.name = topic_parser.name
@@ -30,9 +27,11 @@ class Docs
         else
           topics << Topic.new(topic_parser.to_hash)
         end
-      end
+      }.sort_by(&:order)
+    end
 
-      topics.sort_by(&:order)
+    def topics_file_paths(category_slug)
+      Dir.glob(File.join("docs", category_slug, '*.md'))
     end
 
     def category_heading?(slug)
