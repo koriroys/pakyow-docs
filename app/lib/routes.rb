@@ -1,6 +1,6 @@
 Pakyow::App.routes do
   fn :navigation do
-    categories = Docs.categories
+    categories = Category.all
     partial(:nav).scope(:category).apply(categories) do |category|
       scope(:topic).apply(category.topics)
     end
@@ -49,8 +49,8 @@ Pakyow::App.routes do
     if slug && !slug.empty?
       presenter.path = 'doc'
 
-      category = Docs.find(params[:slug])
-      if category
+
+      if category = Category.find(params[:slug])
         view.title = "Pakyow Docs | #{category.name}"
 
         topics = category.topics
