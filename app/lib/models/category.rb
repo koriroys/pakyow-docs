@@ -25,17 +25,18 @@ class Category
   end
 
   def parse_topics!
-    self.topics = topics_file_paths.each.with_object([]) { |pn, topics|
+    self.topics = topics_file_paths.map { |pn|
       topic_slug = pn.basename(".*").to_s
 
       if category_heading?(topic_slug)
         category_heading = CategoryHeadingParser.new(pn)
         self.name = category_heading.name
         self.overview = category_heading.overview
+        nil
       else
-        topics << TopicParser.new(pn, slug, manifest.order(topic_slug)).topic
+        TopicParser.new(pn, slug, manifest.order(topic_slug)).topic
       end
-    }.sort_by(&:order)
+    }.compact.sort_by(&:order)
   end
 
   private
