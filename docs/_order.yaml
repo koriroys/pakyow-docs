@@ -1,7 +1,7 @@
 - getting_started
 - routing
 - helpers
-- view_concepts
+# - view_concepts
 - view_composition
 - view_management
 - data_binding
@@ -11,6 +11,6 @@
 - mailer
 - data
 - configuration
-- middleware
-- deployment
+# - middleware
+# - deployment
 - tools

@@ -25,18 +25,16 @@ class Category
   end
 
   def parse_topics!
-    self.topics = topics_file_paths.map { |pn|
-      topic_slug = pn.basename(".*").to_s
+    heading_path_names, topics_path_names = topics_file_path_names.partition { |pn|
+      category_heading?(topic_slug(pn))
+    }
+    category_heading = CategoryHeadingParser.new(heading_path_names.first)
+    self.name = category_heading.name
+    self.overview = category_heading.overview
 
-      if category_heading?(topic_slug)
-        category_heading = CategoryHeadingParser.new(pn)
-        self.name = category_heading.name
-        self.overview = category_heading.overview
-        nil
-      else
-        TopicParser.new(pn, slug, manifest.order(topic_slug)).topic
-      end
-    }.compact.sort_by(&:order)
+    self.topics = topics_path_names.map { |topic_path_name|
+      TopicParser.new(topic_path_name, slug, manifest.order(topic_slug(topic_path_name))).topic
+    }.sort_by(&:order)
   end
 
   private
@@ -45,11 +43,15 @@ class Category
     @manifest ||= ManifestParser.new(slug)
   end
 
+  def topic_slug(pathname)
+    pathname.basename(".*").to_s
+  end
+
   def category_heading?(topic_slug)
     topic_slug == "_overview"
   end
 
-  def topics_file_paths
+  def topics_file_path_names
     topics_file_names.map {|filename| Pathname.new(filename) }
   end
 
