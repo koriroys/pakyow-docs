@@ -25,10 +25,7 @@ class Category
   end
 
   def parse_topics!
-    heading_path_names, topics_path_names = topics_file_path_names.partition { |pn|
-      category_heading?(topic_slug(pn))
-    }
-    category_heading = CategoryHeadingParser.new(heading_path_names.first)
+    category_heading = CategoryHeadingParser.new(heading_path_name)
     self.name = category_heading.name
     self.overview = category_heading.overview
 
@@ -38,6 +35,14 @@ class Category
   end
 
   private
+
+  def heading_path_name
+    topics_file_path_names.select { |pn| category_heading?(topic_slug(pn)) }.first
+  end
+
+  def topics_path_names
+    topics_file_path_names.select { |pn| !category_heading?(topic_slug(pn)) }
+  end
 
   def manifest
     @manifest ||= ManifestParser.new(slug)
