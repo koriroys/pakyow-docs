@@ -45,16 +45,13 @@ Pakyow::App.routes do
     if slug && !slug.empty?
       presenter.path = 'doc'
 
-
       if category = Category.find(params[:slug])
         view.title = "Pakyow Docs | #{category.name}"
-
-        topics = category.topics
 
         container(:default).scope(:category).with do
           bind(category)
 
-          scope(:topic).apply(topics) do |topic|
+          scope(:topic).apply(category.topics) do |topic|
             prop(:name).attrs.id = topic.slug
           end
         end
