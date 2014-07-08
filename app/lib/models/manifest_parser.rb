@@ -3,8 +3,8 @@ class ManifestParser
     @category_slug = category_slug
   end
 
-  def order(slug)
-    topic_order.index(slug)
+  def order(topic_slug)
+    topic_order.index(topic_slug)
   end
 
   private

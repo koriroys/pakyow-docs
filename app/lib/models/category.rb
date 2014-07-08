@@ -25,30 +25,32 @@ class Category
   end
 
   def parse_topics!
-    manifest = ManifestParser.new(slug)
-
-    self.topics = topics_file_paths(slug).each.with_object([]) { |topic_file_path, topics|
+    self.topics = topics_file_paths.each.with_object([]) { |topic_file_path, topics|
       pn = Pathname.new(topic_file_path)
-      slug = pn.basename(".*").to_s
+      topic_slug = pn.basename(".*").to_s
 
-      if category_heading?(slug)
+      if category_heading?(topic_slug)
         category_heading = CategoryHeadingParser.new(pn)
         self.name = category_heading.name
         self.overview = category_heading.overview
       else
-        topics << TopicParser.new(pn, slug, manifest.order(slug)).topic
+        topics << TopicParser.new(pn, slug, manifest.order(topic_slug)).topic
       end
     }.sort_by(&:order)
   end
 
   private
 
+  def manifest
+    @manifest ||= ManifestParser.new(slug)
+  end
+
   def category_heading?(slug)
     slug == "_overview"
   end
 
-  def topics_file_paths(category_slug)
-    Dir.glob(File.join("docs", category_slug, '*.md'))
+  def topics_file_paths
+    Dir.glob(File.join("docs", slug, '*.md'))
   end
 
   attr_writer :name, :overview, :topics
