@@ -35,10 +35,6 @@ Pakyow::App.routes do
     presenter.path = 'errors/500'
   end
 
-  get 'f' do
-    f
-  end
-
   default do
     reroute('/getting_started')
   end
