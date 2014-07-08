@@ -40,9 +40,7 @@ Pakyow::App.routes do
   end
 
   get '/:slug', :doc, after: [:navigation] do
-    slug = params[:slug]
-
-    if slug && !slug.empty?
+    if slug = params[:slug]
       presenter.path = 'doc'
 
       if category = Category.find(params[:slug])
