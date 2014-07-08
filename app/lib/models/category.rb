@@ -25,8 +25,7 @@ class Category
   end
 
   def parse_topics!
-    self.topics = topics_file_paths.each.with_object([]) { |topic_file_path, topics|
-      pn = Pathname.new(topic_file_path)
+    self.topics = topics_file_paths.each.with_object([]) { |pn, topics|
       topic_slug = pn.basename(".*").to_s
 
       if category_heading?(topic_slug)
@@ -45,11 +44,15 @@ class Category
     @manifest ||= ManifestParser.new(slug)
   end
 
-  def category_heading?(slug)
-    slug == "_overview"
+  def category_heading?(topic_slug)
+    topic_slug == "_overview"
   end
 
   def topics_file_paths
+    topics_file_names.map {|filename| Pathname.new(filename) }
+  end
+
+  def topics_file_names
     Dir.glob(File.join("docs", slug, '*.md'))
   end
 
