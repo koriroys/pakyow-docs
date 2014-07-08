@@ -36,6 +36,4 @@ class TopicParser
   def raw
     @raw ||= pn.read
   end
-
-  attr_reader :manifest
 end

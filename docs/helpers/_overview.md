@@ -11,7 +11,7 @@ Helper methods are defined in the Pakyow::Helpers module. You can define your ow
       end
     end
 
-The helpers are automatically included ino routes and bindings. You can add them to any class by including:
+The helpers are automatically included into routes and bindings. You can add them to any class by including:
 
     ruby:
     include Pakyow::Helpers
